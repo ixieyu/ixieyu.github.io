@@ -1,51 +1,110 @@
-extends base
-- var current_title = page.title || tag.name || category.name || site.title
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
 
-block title
-  if config.subtitle
-    title= config.title + ' | ' + config.subtitle
-  else
-    title= config.title
-block content
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-新文档" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/30/新文档/" class="article-date">
+  <time datetime="2018-10-30T11:04:15.491Z" itemprop="datePublished">2018-10-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="Hello"><a href="#Hello" class="headerlink" title=" Hello"></a> Hello</h2><p>感谢你来到我的小站，这将是我记录生活的地方。<br>记录是一件记录生命的决定。</p>
 
-  for post in page.posts.toArray()
-    .post
-      h2.post-title
-        include _partial/helpers
-        a(href=url_for(post.path))
-          +title(post)
-      .post-meta
-        if theme.comment.changyan.appid && theme.comment.changyan.appkey
-          a.comment-count(href=url_for(post.path) + '#comments')
-            span.cy_cmt_count(id = 'url::' + config.url +'/'+ post.path)
-            = ''+ __('guestbook') + ','
-            span.cy_cmt_participate(id = 'url::' + config.url +'/'+ post.path)
-            = ''+ __('participate')
-        p
-          span.date= post.date.format(config.date_format)
-          if post.categories.length > 0
-            span
-              for category in post.categories.toArray()
-                a.category(href=url_for(category.path))= category.name
-      if post.description
-        .post-content
-          != post.description
-      else if post.excerpt
-        .post-content
-          != post.excerpt
-      else if post.content
-        - var br = post.content.indexOf('\n')
-        if br < 0
-          .post-content
-            != post.content
-        else
-          .post-content
-            != post.content.substring(0, br)
-      p(class='readmore')
-        a(href=url_for(post.path))= __('Readmore')
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/30/新文档/" data-id="cjnvnsb790000jcu1et07b2gf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
 
-  include _partial/paginator
-block pageOnly
-  script(type='text/javascript', src=url_for(theme.js) + '/totop.js' + '?v=' + theme.version, async)
-  if theme.comment.changyan.appid && theme.comment.changyan.appkey
-    script(id="cy_cmt_num", src='http://changyan.sohu.com/upload/plugins/plugins.list.count.js' + '?clientId=' + theme.comment.changyan.appid)
+
+  
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
