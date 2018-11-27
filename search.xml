@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[随记]]></title>
+    <url>%2Fposts%2F16ac1d86.html</url>
+    <content type="text"><![CDATA[最近电脑做了双系统，win+Ubuntu。沉迷于Ubuntu的环境，感觉Ubuntu的操作界面很高效、简洁。然后就是最近上午校内实习，下午就忙着看机器学习。可能好久都不会来win上面更新了….等什么时候有心情了，有什么想说的了，在来倾诉一番吧。]]></content>
+      <categories>
+        <category>随记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[解决Ubuntu终端中的Vi不听话]]></title>
+    <url>%2Fposts%2Fa5ead307.html</url>
+    <content type="text"><![CDATA[在装好Ubuntu后，使用Vi来修改文件时，发现好像不太对劲.在编辑模式下，我的方向键都不会移动方向，反而变成输出字母ABCD。然后Backspace（退格键）也无法删除编辑错误的东西，只能使用Delete键来删除。这次我觉得不再是版本的问题了，于是上网找了找。 解决方案用root权限来编辑/etc/vim/vimrc.tiny文件。做如下修改：12set compatible -&gt; set nocompatiblesetbackspace=2]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[双十一]]></title>
     <url>%2Fposts%2F6650375a.html</url>
     <content type="text"><![CDATA[汪汪汪！]]></content>
