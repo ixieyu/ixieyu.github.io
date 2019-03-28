@@ -7,11 +7,25 @@
       <categories>
         <category>笔记</category>
       </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Pyhton中内建函数]]></title>
+    <url>%2Fposts%2F6610edc8.html</url>
+    <content type="text"><![CDATA[内建函数 hasattrhasattr()函数用于判断对象是否包含对应的属性，返回False/True hasattr(object, name)object –对象name – 字符串，属性名]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[元旦快乐！]]></title>
     <url>%2Fposts%2F66b768da.html</url>
-    <content type="text"><![CDATA[元旦快乐！ 最近懒得都没写2018的总结。希望在2019年：坚持做到每个月的阅读量比上一个月的高。不要等到书到用时方恨少！读书，可以让你遇到更好的人，见到更精彩的世界，让自己拥有更好更多的选择。不要等到年纪大了才遗憾：是年轻时读书太少！多读书，读好书，好读书，趁现在还来得及。最后要时常打电话给家人。]]></content>
+    <content type="text"><![CDATA[元旦快乐！ 最近懒得都没写2018的总结。 希望在2019年：坚持做到每个月的阅读量比上一个月的高。不要等到书到用时方恨少！读书，可以让你遇到更好的人，见到更精彩的世界，让自己拥有更好更多的选择。不要等到年纪大了才遗憾：是年轻时读书太少！多读书，读好书，好读书，趁现在还来得及。最后要时常打电话给家人。]]></content>
+      <tags>
+        <tag>节日</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[随记]]></title>
@@ -30,6 +44,9 @@
     <title><![CDATA[双十一]]></title>
     <url>%2Fposts%2F6650375a.html</url>
     <content type="text"><![CDATA[汪汪汪！]]></content>
+      <tags>
+        <tag>节日</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[立冬]]></title>
@@ -38,6 +55,9 @@
       <categories>
         <category>随记</category>
       </categories>
+      <tags>
+        <tag>节日</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[随记]]></title>
