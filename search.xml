@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Flag]]></title>
+    <url>%2Fposts%2F71c644a4.html</url>
+    <content type="text"><![CDATA[这是一篇加密文章，内容是个人情感宣泄。如果你确实想看，请点击由下角蓝色小图标与我联系。 Incorrect Password! No content to display! U2FsdGVkX18/8I5SPAQX0Ccce6FVTjPaKet+yF4ynpFfhrhg139HqS1xu9bV05N9ErbG+AAqOYkyDLYWqTJQb56l2L8h+h1HjUaUIvfMcd9pjvogcagzuzfuxKB32mjsC9OLLE+txV/ln5eovLM1BkQHXMtqsYZBxnVLUMnVCCxIF9LWIdeQ7bfiJVqGMBwlElJqADxrhnk8mkirCZxlHkSwINgNr4o15Ujw4L6f7/NLkYa9jQPqKvr+2LIc/U4aBxdM9fOuqa9ep+ZaUQMytWR1kPbC+3V4R32Wb8mliK5GLwNxfzEylvdeoyDogaWnMWl0HG1HpZ80noLdtMIaQ6yNELoDGD64oW+QqNkghmgv26CLSLWByy/NuT2e1iExOzSu2IGg9brcWtZ5GU7zQT5OXaWXJmWrX9NGigGHWJ9I3UVIt8YHS5siq8CxqsGZimzXfRPTq1YXGux7ePNI2M2imvEvDYczsqoonCLJ8o3i5T+tiR5jJOj0/BBHGSAYOMx3wHs/BszDW54vzyMeh5+XYX7t234BOjhI73dsyR8rE5H42zwbU52sE956xgUaqQ3MhMsaqNW6y0dsZzRH6GTKCmFdlENZDvcnVxcMXdsw8VYODZKUe5xRFrwaKSFhIspL8pQj/e2XFQcHfAQbA5T5zujltsfswI1refAX/EHXQMonyOf7dVFxJGb/jQFs/Gh6Owf1Dbo/muoVUHoLd6pG2ugy2arRIBHZqBt3eajCWuAH51khyuffFqlZ+LhDkI65Kacqq7f67Jrq7r9AWJsasxeleSkOFDn9QvEdcku255TrvnzY5WgzSr4LA6RH6MO+sPFbXbwDWj6uJubdVf0kPURk0j1qroaY74NuWFJtz9eq2dKcUsKsPzwZ4WWN1IthdjkD7Pnf2gHpDae/xZ68u+TQ4tm5jl4YUrAhLbLjv84vp4u0pBtkEFrmLwYK/V6k2gsn/GF5o1S9cgbW+MdWS2qK3BDsb1/0/PjrrvQ=]]></content>
+      <tags>
+        <tag>Flag</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[廖雪峰Git教程笔记]]></title>
     <url>%2Fposts%2F31ed5d2a.html</url>
     <content type="text"><![CDATA[Git–每一个程序员都必不可少的技能。Git是目前世界上最先进的分布式版本控制系统（没有之一）。 版本控制系统的作用 记录改动 协作编辑 Git的诞生Linus在1991年创建了开源的Linux，从此，Linux系统不断发展，到了2002年，Linux系统已经发展了十年了，代码库之大让Linus很难继续通过手工方式管理了，社区的弟兄们也对这种方式表达了强烈不满，于是Linus选择了一个商业的版本控制系统BitKeeper，BitKeeper的东家BitMover公司出于人道主义精神，授权Linux社区免费使用这个版本控制系统。安定团结的大好局面在2005年就被打破了，原因是Linux社区牛人聚集，不免沾染了一些梁山好汉的江湖习气。开发Samba的Andrew试图破解BitKeeper的协议（这么干的其实也不只他一个），被BitMover公司发现了（监控工作做得不错！），于是BitMover公司怒了，要收回Linux社区的免费使用权。Linus可以向BitMover公司道个歉，保证以后严格管教弟兄们。但是！！！Linus花了两周时间自己用C写了一个分布式版本控制系统，这就是Git！在2008年，GitHub网站上线。 Git命令 新建代码库 12git init 在当前目录新建一个Git代码库 git init [program-name] 新建一个目录，将其初始化为Git代码库 配置 git config （–global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。 如果不加，那只针对当前的仓库起作用。） 1234567git config --list 显示当前的Git配置 git config --global user.name [username] git config --global user.email [email]git config --global color.ui true 配置Git显示颜色 增加/删除文件 12345678910111213141516git add [filename] 添加指定文件到暂存区(表示添加新文件和编辑过的文件不包括删除的文件)git add [dir] 添加指定目录到暂存区，包括子目录 git add . 添加当前目录的所有文件到暂存区(表示添加新文件和编辑过的文件不包括删除的文件)git add -u 表示添加编辑或者删除的文件，不包括新添加的文件 git rm [filename] 删除工作区文件并放进暂存区如果想从暂存区撤销：git reset HEAD -- [filename]如果想撤销工作区的修改：git checkout -- [filename]注意区别 : rm [filename] 删除工作区文件, 并没有放进暂存区如果想撤销工作区的修改：git checkout -- [filename]git rm --cached [filename] 停止追踪文件，但该文件会保留在工作区(untracked状态) 代码提交 12345678git commit -m [message] 暂存区提交到仓库区git commit [filename1] [filename2] ... -m [message] 暂存区的指定文件提交到仓库区git commit -a -m [message] 工作区中修改后，还未使用git add . 命令添加到暂存区中的文件也一并提交上去 相当于git add . 与git commit –m [message] 两句操作合并为一句进行使用。commit完成过后，git status,下方的工作区是干净的git commit -v 提交时显示所有diff信息 分支 12345678910111213141516171819git branch 列出所有本地分支git branch -r 列出所有远程分支git branch -a 列出所有本地分支和远程分支git branch [branch-name] 新建一个分支，但依然停留在当前分支git checkout -b [branch] 新建一个分支，并切换到该分支git branch --track [branch] [remote-branch] 新建一个分支，与指定的远程分支建立追踪关系git checkout [branch-name] 切换到指定分支，并更新工作区git branch --set-upstream [branch] [remote-branch] 建立追踪关系，在现有分支与指定的远程分支之间git merge [branch] 合并指定分支到当前分支 git branch -d [branch-name] 删除分支 标签 1234567891011121314151617git tag 列出所有taggit tag [tag] 新建一个tag在当前commitgit tag [tag] [commit] 新建一个tag在指定commitgit tag -d [tag] 删除本地taggit push origin :refs/tags/[tagName] 删除远程taggit show [tag] 查看tag信息git push [remote] [tag] 提交指定taggit push [remote] --tags 提交所有taggit checkout -b [branch] [tag] 新建一个分支，指向某个tag 查看信息 12345678910111213141516171819git status 显示有变更的文件git log 显示当前分支的版本历史git log --stat 显示commit历史，以及每次commit发生变更的文件git log -p [file] 显示指定文件相关的每一次diff‘git log -5 --pretty --oneline 显示过去5次提交git shortlog -sn 显示所有提交过的用户，按提交次数排序git blame [file] 显示指定文件是什么人在什么时间修改过git diff 显示暂存区和工作区的差异git diff --cached [file] 显示工作区与当前分支最新commit之间的差异git reflog 显示当前分支的最近几次提交 远程同步 123456789101112131415git fetch [remote] 下载远程仓库的所有变动git remote -v 显示所有远程仓库 git remote show [remote] 显示某个远程仓库的信息git remote add [shortname] [url] 增加一个新的远程仓库，并命名git pull [remote] [branch] 取回远程仓库的变化，并与本地分支合并git push [remote] [branch] 上传本地指定分支到远程仓库git push [remote] --force 强行推送当前分支到远程仓库，即使有冲突git push [remote] --all 推送所有分支到远程仓库 撤销 1234567891011121314151617181920git checkout [file] 恢复暂存区的指定文件到工作区git checkout [commit] [file] 恢复某个commit的指定文件到暂存区和工作区git checkout . 恢复暂存区的所有文件到工作区git reset [file] 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变git reset --hard 重置暂存区与工作区，与上一次commit保持一致git reset [commit] 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变git reset --hard [commit] 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致git reset --keep [commit] 重置当前HEAD为指定commit，但保持暂存区和工作区不变git revert [commit] 新建一个commit，用来撤销指定commit,后者的所有变化都将被前者抵消，并且应用到当前分支git stashgit stash pop 暂时将未提交的变化移除，稍后再移入]]></content>
@@ -14,9 +22,20 @@
   <entry>
     <title><![CDATA[Pyhton中内建函数]]></title>
     <url>%2Fposts%2F6610edc8.html</url>
-    <content type="text"><![CDATA[内建函数 hasattrhasattr()函数用于判断对象是否包含对应的属性，返回False/True hasattr(object, name)object –对象name – 字符串，属性名]]></content>
+    <content type="text"><![CDATA[内建函数hasattrhasattr()函数用于判断对象是否包含对应的属性，返回False/True hasattr(object, name)object –对象name – 字符串，属性名]]></content>
       <categories>
         <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2019书单]]></title>
+    <url>%2Fposts%2F8c42af6d.html</url>
+    <content type="text"><![CDATA[2019年书单 图解HTTP 大秦帝国 最近看完科幻小说，突然想看点有关于历史的书，被安利的好久的大秦帝国被我下到了kindle里，大秦帝国这本书太厚了，可能好久都看不完….]]></content>
+      <categories>
+        <category>读书</category>
       </categories>
   </entry>
   <entry>
