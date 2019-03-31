@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python中的坑]]></title>
+    <url>%2Fposts%2F1fd52e7b.html</url>
+    <content type="text"><![CDATA[Python中的坑早踩早避免。找了很多最后还是github上比较全面详细链接:What the f*ck Python! 复制、浅拷贝、深拷贝 复制：直接赋值,传递对象的引用而已,原始对象改变，被赋值的对象也会做相同的改变 浅拷贝（切片操作、工厂函数、copy函数）：没有拷贝子对象，所以原始数据改变，子对象会改变 深拷贝：包含对象里面的自对象的拷贝，所以原始对象的改变不会造成深拷贝里任何子元素的改变 如果在循环引用中的对象定义了 del ,那么python gc不能进行回收，因此，存在内存泄漏的风险 or运算符 1if a == 3 or b == 3 or c == 3: 运行 1if a or b or c == 3: # Wrong 这是由于or的优先级低于==，所以表达式将被评估为if (a) or (b) or (c == 3):。可以使用 1234if a == 3 or b == 3 or c == 3: # Right Way if any([a == 3, b == 3, c == 3]): # Right if any(x == 3 for x in (a, b, c)): # Right if 3 in (a, b, c): # Right 列表的+和+=, append和extend 1234567891011121314151617181920212223242526In [17]: print('ID:', id(a_list))('ID:', 4481323592) In [18]: a_list += [1] In [19]: print('ID (+=):', id(a_list))('ID (+=):', 4481323592) # 使用+= 还是在原来的列表上操作 In [20]: a_list = a_list + [2] In [21]: print('ID (list = list + ...):', id(a_list))('ID (list = list + ...):', 4481293056) # 简单的+其实已经改变了原有列表In [28]: a_list = [] In [29]: id(a_list)Out[29]: 4481326976 In [30]: a_list.append(1) In [31]: id(a_list)Out[31]: 4481326976 # append 是在原有列表添加 In [32]: a_list.extend([2]) In [33]: id(a_list)Out[33]: 4481326976 # extend 也是在原有列表上添加]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Flag]]></title>
     <url>%2Fposts%2F71c644a4.html</url>
-    <content type="text"><![CDATA[这是一篇加密文章，内容是个人情感宣泄。如果你确实想看，请点击由下角蓝色小图标与我联系。 Incorrect Password! No content to display! U2FsdGVkX1+gq2oQyvm5yjWZouQ4j8n0xVixjFLQJYZ0ge7H5ADbk/FfTlajydKp+M00df594YQJpZJlOqvR1/WN5MFDFbAiJW8iPEi7mrj+Th+3G6uWpGVMyLALVpaC8mDydZjmXWMSMqeLAAUSwc8OPDOG8SpCnBGqu4g2OaQpjRicyNiNy/AAm9s0LUFvVddCroAn9yAYDlZgxVtSIiVN6tcp8cLgjeeU1T0e22ztmRiBgv3W1W17zaGJ0Y05azAgu7f6koRX7p4YDBR60XWM5hcLhbdXoJcmVSjMCGEJVRWnIBrHjuJ4wS4NLuolBzvJdV7i+xeKUJeNZN4XHR4XMRzFNhY9WSxn5FB5C5nInVdjVcq3qCLkfHqJhJzJFIUU9mVreAg7tW3uSQw0SSC7aG0SRdqx9h9Can2c1v8GGJBvybw3bRsv9NXJIZbgSErbtwWwNP74Clf8TrTvd7e2sirr4x883JaVjLW9GjfvBC87TpEwXn7ttLcMMenIIuGhjrxlzKQLDxOQvXGhd52IDNSSTq8JpKnoH/nTvW+NzNSbhLavubiPSIoAysP5qxb9CwmVZnHOSuaOiLNBK1jh0UeB6nceTK2dVNTqDYjGz/yfkzpFaFyvAjRGaTfv+PZCN1yqA4JMRxP5P36ZmRIwFcp25Vg63jaUheMacobi14Y/4CrMKDTfqeHUa1ARzWN1OJKtp3W9glCzt2JTroQpyXxhAjVfwxg+Jnu/hdDA9fpgJg95qR657ikxE3xbUWQYkeIvDagHFUGJsvuC9EZGTqbUGr0PkmmgG9runQjcmN5SYWtrw1ZFigFPhyvHrAD+io8bRS75T1gi8FHxIe3IfEazPvsJae7gUkTrvwucKTnVqC45C8FEO6b0AgTJt4FxqoX9O2bbz7DnmRbjs8WP8x4RmbB+CgCSKIMLyYbnT0/qVq8Zqiz+A+B3yrd8vM+JNf86xFGmackDlxAVttkGea7lYObOtv84qrGQa/Y=]]></content>
+    <content type="text"><![CDATA[这是一篇加密文章，内容是个人情感宣泄。如果你确实想看，请点击右下角蓝色小图标与我联系。 Incorrect Password! No content to display! U2FsdGVkX1/MhtTSrtxZcQCCo4wHtVZw8WZ2b3vch2cwI/llUQUof44e4dsSW4H4o7Z+xCctmQRJBSkQCplZq2fQ+codpIM2x8cHV/x2jsRUgCoRKOFfPX9kx08g6Ib/uQWw7ANJ+BA+sqK1KAfAYBTbs1Zy+po5aoZ8l0JXEcCHett5OjAOPydulkrqPmgO8nDtepAi2wbwvW3fTcFVu5s5mgRgheZS5ZYfHbky90SpTAuDHNDH8RLp4Eor1oy3QM7VkYUpJRlKklwZkmLo4oqc4C3uU6rX/3aFtf8NUOJymAayOUXR5xI5N3PMxLwOFssSsNfB+srxtgIOzOL0VljZa74eLVJ7zRZ/+wsLW/c0kKpmmkJb90hTW1SjMRyl1xhUmUkH0fnmNJUFDvnxUkxlr9SAe4PES62RsJl+VnrC7PBCeyqr5JC4BTiXV9Pw0vARh0hGbKcME5OfutV+vCiLkzFfvhjvPLN4GepRHsrZKbs/dYKNr9/rvf5TyWqUIY+xQVKPXhhPtvhpA+tGyb7gQ3fdUTcTByoO+MY2kpPSu6W4RoQXbvbCeQ7KvTJLJ3M9c2CLu9i00r0KZyIU7a0nrBpJkJQ+z0mngbXRvlwCzidSJykhLJVKLSoQBfCWhujxbTW9kiSWEyQKkhmdQ6xEEbJA2kQ5+0lMbAXZ1UnnQ99m1ziGPMh+Z34oChunS7eos7EG3QJWb5f0UPfnKKs7EYL/x9uUbKqXBONVw2/2n2FSEMvwk/LKJHpC+ajxeXGURNk95i83dtXF5E56ErA/9gUzwA5np68PYGwOv3NIKdJmEAAaZ0XcMy4K+NoUFcjQHRQZNjiabnvTNWq+k+pTM0c+T547qJXRlMJW8q7937N3pm3OlgNOiqljyGm4lSynBDPx1xbDzGyhzjo7oHGao3X8kNS9oQJvMs7cSH6Zg1Eeu5ijKo90VY12EB+0gEFLQC/ULmMu2aO3pdKRazsBAcFpfmqb0UPIsjJ/Puc=]]></content>
       <tags>
         <tag>Flag</tag>
       </tags>
