@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Redis数据库-操作]]></title>
+    <url>%2Fposts%2F8ce91e30.html</url>
+    <content type="text"><![CDATA[了解Redis存储数据结构。 数据结构 Redis是key-value的数据结构，每条数据都是一个键值对 键的类型是字符串 注意：键不能重复 值得类型有: 字符串string 哈希hash 列表list 结合set 有序集合zset 数据操作行为 保存 修改 获取 删除 string类型 字符串类型是Redis中最为基础得数据存储类型，它在Redis中是二进制安全得，这便意味着该类型可以接收任何格式得数据，如JPEG图像数据或Json对象描述信息等。在Redis中字符串类型得value最多可以容纳的数据长度是512M。 保存如果设置的键不存在的则为添加，如果设置的键已经存在则修改 设置键值 set key value 设置键为name值为redis set name redis 设置键值及过期时间，以秒为单位 setex key seconds value 设置多个键值 mset key1 value1 key2 value2 … 追加值 append key value 获取 获取:根据键获取值，如果不存在此键则返回nil get key 根据多个键获取多个值 mget key1 key2 删除参看键命令 键命令 查找键,参数支持正则表达式 keys pattern 查看所有键 keys * 查看名称中包含a的键 keys ‘a*’ 判断键是否存在，如果存在返回1，不存在返回 exists key1 查看键对应的value的类型 type key 删除键及对应的值 del key1 key2 … 设置过期时间，以秒为单位 如果没有指定过期时间则⼀直存在，直到使⽤DEL移除 expire key seconds 查看有效时间，以秒为单位 ttl key hash用于存储对象，对象的结构为属性、值值得类型为string 增加、修改 设置单个属性 hset key field value 设置多个属性 hmset key field1 value1 field2 value2 … 获取 获取指定键所有的属性 hkeys key 获取一个属性的值 hget key field 获取多个属性的值 hmget key field1 field2 … 获取所有属性的值 hvals key 删除删除整个hash键及值，使⽤del命令删除属性，属性对应的值会被⼀起删除 hdel key field1 field2 … list列表的元素类型为string按照插入顺序排序 增加 在左侧插⼊数据 lpush key value1 value2 … 在右侧插⼊数据 rpush key value1 value2 … 在指定元素的前或后插⼊新元素 linsert key before或after 现有元素 新元素 获取 返回列表⾥指定范围内的元素 start、stop为元素的下标索引 索引从左侧开始，第⼀个元素为0 索引可以是负数，表示从尾部开始计数，如-1表示最后⼀个元素 lrange key start stop 设置指定索引位置得元素值 索引从左侧开始，第⼀个元素为0 索引可以是负数，表示尾部开始计数，如-1表示最后⼀个元素 lset key index value 删除 删除指定元素 将列表中前count次出现的值为value的元素移除 count &gt; 0: 从头往尾移除 count &lt; 0: 从尾往头移除 count = 0: 移除所有 lrem key count value set无序集合元素为string元素具有唯一性，不重复说明:对于集合没有修改操作 增加 添加元素 sadd key member1 member2 … 获取 返回所有的元素 smembers key 删除 删除指定元素 srem key value zset类型sorted set，有序集合元素为string类型元素具有唯⼀性，不重复每个元素都会关联一个double类型的score，表示权重，通过权重将元素从⼩到⼤排序说明：没有修改操作 增加 添加 zadd key score1 member1 score2 member2 … 获取 返回指定范围内的元素 start、stop为元素的下标索引 索引从左侧开始，第一个元素为0 索引可以是负数，表示从尾部开始计数，如-1表示最后⼀个元素 zrange key start stop 返回score值在min和max之间的成员 zrangebyscore key min max 返回成员member的score值 zscore key member 删除 删除指定元素 zrem key member1 member2 … 删除权重在指定范围的元素 zremrangebyscore key min max]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Redis数据库]]></title>
+    <url>%2Fposts%2Feb52a7b2.html</url>
+    <content type="text"><![CDATA[Redis是一个高性能的key-value数据库。 NoSQL数据库:新一类出现的数据库(not only sql),它的特点： 不支持SQL语法 存储结构跟传统关系型数据库中的那种关系表完全不同，nosql中存储的数据都是Kv形式 NoSQL的世界中没有一种通用的语言，每种nosql数据库都有自己的api和语法，以及擅长的业务场景 NoSQL中的产品种类先当多 Mogodb Redis Hbase hadoop Cassandra hadoopRedis简介 Redis是一个开源的使用ANSI C语言编写支持网路，可基于内存亦可持久化的日志型，Key-Value数据库，并提供多种语言的API。Redis特性 Redis支持数据的持久化，可以将内存中的数据保存在磁盘中，重启的时候可以再次加载进行使用。 Redis不仅仅支持简单的key-value类型的数据，同时还提供list，set，zset，hash等数据结构的存储。 Redis支持数据的备份，即master-slave模式的数据备份。Redis优势 性能极高 – Redis能读的速度是110000次/s,写的速度是81000次/s 。 丰富的数据类型 – Redis支持二进制案例的 Strings, Lists, Hashes, Sets 及 Ordered Sets 数据类型操作。 原子 – Redis的所有操作都是原子性的，同时Redis还支持对几个操作全并后的原子性执行。 丰富的特性 – Redis还支持 publish/subscribe, 通知, key 过期等等特性。Reids应用场景 用来做缓存(ehcache/memcached)——redis的所有数据是放在内存中的（内存数据库） 可以在某些特定应用场景下替代传统数据库——比如社交类的应用 在一些大型系统中，巧妙地实现一些特定的功能：session共享、购物车 只要你有丰富的想象力，redis可以用在可以给你无限的惊喜……. Reids官方网站 Reids中文官网]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python中的坑]]></title>
     <url>%2Fposts%2F1fd52e7b.html</url>
     <content type="text"><![CDATA[Python中的坑早踩早避免。找了很多最后还是github上比较全面详细链接:What the f*ck Python! 复制、浅拷贝、深拷贝 复制：直接赋值,传递对象的引用而已,原始对象改变，被赋值的对象也会做相同的改变 浅拷贝（切片操作、工厂函数、copy函数）：没有拷贝子对象，所以原始数据改变，子对象会改变 深拷贝：包含对象里面的自对象的拷贝，所以原始对象的改变不会造成深拷贝里任何子元素的改变 如果在循环引用中的对象定义了 del ,那么python gc不能进行回收，因此，存在内存泄漏的风险 or运算符 1if a == 3 or b == 3 or c == 3: 运行 1if a or b or c == 3: # Wrong 这是由于or的优先级低于==，所以表达式将被评估为if (a) or (b) or (c == 3):。可以使用 1234if a == 3 or b == 3 or c == 3: # Right Way if any([a == 3, b == 3, c == 3]): # Right if any(x == 3 for x in (a, b, c)): # Right if 3 in (a, b, c): # Right 列表的+和+=, append和extend 1234567891011121314151617181920212223242526In [17]: print('ID:', id(a_list))('ID:', 4481323592) In [18]: a_list += [1] In [19]: print('ID (+=):', id(a_list))('ID (+=):', 4481323592) # 使用+= 还是在原来的列表上操作 In [20]: a_list = a_list + [2] In [21]: print('ID (list = list + ...):', id(a_list))('ID (list = list + ...):', 4481293056) # 简单的+其实已经改变了原有列表In [28]: a_list = [] In [29]: id(a_list)Out[29]: 4481326976 In [30]: a_list.append(1) In [31]: id(a_list)Out[31]: 4481326976 # append 是在原有列表添加 In [32]: a_list.extend([2]) In [33]: id(a_list)Out[33]: 4481326976 # extend 也是在原有列表上添加]]></content>
@@ -14,7 +38,7 @@
   <entry>
     <title><![CDATA[Flag]]></title>
     <url>%2Fposts%2F71c644a4.html</url>
-    <content type="text"><![CDATA[这是一篇加密文章，内容是个人情感宣泄。如果你确实想看，请点击右下角蓝色小图标与我联系。 Incorrect Password! No content to display! U2FsdGVkX1/MhtTSrtxZcQCCo4wHtVZw8WZ2b3vch2cwI/llUQUof44e4dsSW4H4o7Z+xCctmQRJBSkQCplZq2fQ+codpIM2x8cHV/x2jsRUgCoRKOFfPX9kx08g6Ib/uQWw7ANJ+BA+sqK1KAfAYBTbs1Zy+po5aoZ8l0JXEcCHett5OjAOPydulkrqPmgO8nDtepAi2wbwvW3fTcFVu5s5mgRgheZS5ZYfHbky90SpTAuDHNDH8RLp4Eor1oy3QM7VkYUpJRlKklwZkmLo4oqc4C3uU6rX/3aFtf8NUOJymAayOUXR5xI5N3PMxLwOFssSsNfB+srxtgIOzOL0VljZa74eLVJ7zRZ/+wsLW/c0kKpmmkJb90hTW1SjMRyl1xhUmUkH0fnmNJUFDvnxUkxlr9SAe4PES62RsJl+VnrC7PBCeyqr5JC4BTiXV9Pw0vARh0hGbKcME5OfutV+vCiLkzFfvhjvPLN4GepRHsrZKbs/dYKNr9/rvf5TyWqUIY+xQVKPXhhPtvhpA+tGyb7gQ3fdUTcTByoO+MY2kpPSu6W4RoQXbvbCeQ7KvTJLJ3M9c2CLu9i00r0KZyIU7a0nrBpJkJQ+z0mngbXRvlwCzidSJykhLJVKLSoQBfCWhujxbTW9kiSWEyQKkhmdQ6xEEbJA2kQ5+0lMbAXZ1UnnQ99m1ziGPMh+Z34oChunS7eos7EG3QJWb5f0UPfnKKs7EYL/x9uUbKqXBONVw2/2n2FSEMvwk/LKJHpC+ajxeXGURNk95i83dtXF5E56ErA/9gUzwA5np68PYGwOv3NIKdJmEAAaZ0XcMy4K+NoUFcjQHRQZNjiabnvTNWq+k+pTM0c+T547qJXRlMJW8q7937N3pm3OlgNOiqljyGm4lSynBDPx1xbDzGyhzjo7oHGao3X8kNS9oQJvMs7cSH6Zg1Eeu5ijKo90VY12EB+0gEFLQC/ULmMu2aO3pdKRazsBAcFpfmqb0UPIsjJ/Puc=]]></content>
+    <content type="text"><![CDATA[这是一篇加密文章，内容是个人情感宣泄。如果你确实想看，请点击右下角蓝色小图标与我联系。 Incorrect Password! No content to display! U2FsdGVkX19bVubepAbWhanwG3vsvBR71fQC+a0yDqyEsGjdX0GCDbLT9y6W/ngVG464oA6dH0RU5pCPMiRQEcj2f9a9eorCVCj84Gnl0V5HdonpTtnoB07pLp5+k0vMdY9k7jFewLOJYjkYZzMGThWpUSuZyPAQ9XEAyu8Wz3fAJPLkEfFcxsSwm4N3Nvr1lX286apqd2UfVn80U1py1b33lLG7KjcDUf35dEPAFC7j7c8wyTZD0adzclzDEt+dCP5WakJSWfY/SQ58snCAKp54pb2u23IWdMD+xwDIwBag55C7J+hGHiE41+myBbr4QbBquMnZZeSK1vk1JydRgT+ErNDGx7py1oRkrxX5BmZYPMuynrZhbnJavDifqz71xOGIJWLqPGWSme/jOqQlaDHrabEVnVZDa6eqeDS3L/lUmBYMrsJbv8YfuxNd20p8QctI2VQkbXU5z+7lBlhhisP6scmB2Xxsb9cv9Pv/Q6uXG1xzrJuN7iDiENrZNWQKs/2w4aVO2eMDuen1jSSShWaMIH8xocwcXHGzd2YTcDhEW+O+3Vmq3PxdXdRFnoVk6EnajlcENb+f20hRQzeHXe9/Zv+v6EtD1wbCuY6f3vNH7DGvx9jjp5zUQZLNRS2u3x4o4Us9jSWiO9wydMqAYgKvaowJGk7jG1e8YdlGaRg5oRRpYY1T2P5u1NjJGvK4umOv1WW4wkDz4oIB1VVFXDBAW01qMa94EaB7FQEcSfrmP/nElIodRt5XwZaJfygmXB/9QtwYnRrX67FWdbVxPHQpch7s7YPnLY1cMfa1OsaCx/VjCMoW6rM/ZgoCoMTg06SunlGphnAv57WdvkR6fHFGeoqleBjTMJ7x4bGWdG0O+K6GQndeww5lL+Qsi2bfrsj9IoprAb0JxG9VTf4AavfHWsPdrnUdgPOJRA+wNpNj6xkeMfOZA8AUEJ1awUj3Ny4b3b3UPRPEP5nX4Ec7hFrfGpBSi4bYt0BOYgD+PAE=]]></content>
       <tags>
         <tag>Flag</tag>
       </tags>
