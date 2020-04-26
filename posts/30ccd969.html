@@ -1,0 +1,319 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico?v=6.4.2"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico?v=6.4.2"><link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"6.4.2",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><script>!function(e,t,o,c,i,a,n){e.DaoVoiceObject=i,e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date,a=t.createElement(o),n=t.getElementsByTagName(o)[0],a.async=1,a.src=c,a.charset="utf-8",n.parentNode.insertBefore(a,n)}(window,document,"script",("https:"==document.location.protocol?"https:":"http:")+"//widget.daovoice.io/widget/0f81ff2f.js","daovoice"),daovoice("init",{app_id:"31abce90"}),daovoice("update")</script><meta name="description" content="复习1.整体修改与局部修改"><meta name="keywords" content="DRF"><meta property="og:type" content="article"><meta property="og:title" content="DRF框架 (五)"><meta property="og:url" content="http://ixieyu.top/posts/30ccd969.html"><meta property="og:site_name" content="X&#39;s BLOG"><meta property="og:description" content="复习1.整体修改与局部修改"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="http://ixieyu.top/posts/30ccd969/image-20200426090152366.png"><meta property="og:updated_time" content="2020-04-26T01:26:39.637Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="DRF框架 (五)"><meta name="twitter:description" content="复习1.整体修改与局部修改"><meta name="twitter:image" content="http://ixieyu.top/posts/30ccd969/image-20200426090152366.png"><link rel="canonical" href="http://ixieyu.top/posts/30ccd969.html"><script type="text/javascript" id="page.configurations">CONFIG.page={sidebar:""}</script><title>DRF框架 (五) | X's BLOG</title><noscript><style type="text/css">.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.logo-line-after i{right:initial}</style></noscript></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">X's BLOG</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">我们从小就开始学说话，然后再用一辈子去说话！</p></div><div class="site-nav-toggle"> <button aria-label="切换导航栏"><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i><br>日程表</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><div class="reading-progress-bar"></div><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://ixieyu.top/posts/30ccd969.html"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="Xie"><meta itemprop="description" content="Xie·Yu's blog."><meta itemprop="image" content="/images/header.jpg"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="X's BLOG"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">DRF框架 (五)</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2020-04-26 08:56:41 / 修改时间：09:26:39" itemprop="dateCreated datePublished" datetime="2020-04-26T08:56:41+08:00">2020-04-26</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/DRF框架/" itemprop="url" rel="index"><span itemprop="name">DRF框架</span></a></span></span></div></header><div class="post-body" itemprop="articleBody"><h1 id="复习"><a href="#复习" class="headerlink" title="复习"></a><strong>复习</strong></h1><p>1.整体修改与局部修改</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 序列化get （给前端传递参数）  #查询</span><br><span class="line">ser_obj = ModelSerializer(model_obj)   #只传递一个参数，默认是instance的参数，查询数据</span><br><span class="line"># 反序列化post  save() =&gt; create()（数据保存到数据库中）  #添加</span><br><span class="line">ser_obj = ModelSerializer(data=model_data)  #传递data参数，保存数据</span><br><span class="line">#反序列化put   save() =&gt; update()  #修改（需要传入instance和data参数）</span><br><span class="line">ser_obj = ModelSerializer(instance=model_obj,data=model_data)  #默认partial参数是False,整体修改</span><br><span class="line">#反序列化patch   partial=True =&gt; 匹配字段required=True校验条件</span><br><span class="line">ser_obj = ModelSerializer(instance=model_obj,data=model_data,partial=True)  #局部修改</span><br></pre></td></tr></table></figure><p>2.群改ListSerializer</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">ser_obj = ModelSerializer(instance=model_obj,data=model_data,partial=True,many=True)</span><br><span class="line">    </span><br><span class="line">    # 实现群改功能，反序列化情况下的create、update就不再调用ModelSerializer的</span><br><span class="line">    # 而是调用 ModelSerializer.Meta.list_serializer_class 指向的 ListSerializer 类的create、update</span><br><span class="line">    # ListSerializer默认只实现了群增的create，要实现群改，必须重写update</span><br><span class="line">    </span><br><span class="line">　　#自定义序列化类，重写update方法</span><br><span class="line">    class MyListSerializer(ListSerializer):</span><br><span class="line">        def update(self, instance, validated_data):</span><br><span class="line">            # print(instance)  # 要更新的对象们: [obj1, obj2, ...]</span><br><span class="line">            # print(validated_data)  # 更新的对象对应的数据们: [&#123;&#125;, &#123;&#125;, ...]</span><br><span class="line">            # print(self.child)  # 服务的模型序列化类 - V2BookModelSerializer</span><br><span class="line">            for index, obj in enumerate(instance):</span><br><span class="line">                self.child.update(obj, validated_data[index])</span><br><span class="line">            return instance</span><br><span class="line">            </span><br><span class="line">     class MyModelSerializer(ModelSerializer):</span><br><span class="line">         class Meta:</span><br><span class="line">             list_serializer_class = MyListSerializer</span><br><span class="line">     </span><br><span class="line">     将两者类建立关联，在MyListSerializer中就可以用self.child拿到MyModelSerializer，进而使用MyModelSerializer中封装好的方法</span><br><span class="line">     cls.Meta.list_serializer_class.child = cls</span><br></pre></td></tr></table></figure><h2 id="视图类views-py使用context传递参数给序列化类serializers-py"><a href="#视图类views-py使用context传递参数给序列化类serializers-py" class="headerlink" title="视图类views.py使用context传递参数给序列化类serializers.py"></a>视图类views.py使用context传递参数给序列化类serializers.py</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1）在视图类中实例化序列化对象时，可以设置context内容</span><br><span class="line">2）在序列化类中的局部钩子、全局钩子、create、update方法中，都可以用self.context访问视图类传递过来的内容</span><br><span class="line"></span><br><span class="line">需求：</span><br><span class="line"># 1) 在视图类views中，可以通过request得到登陆用户request.user</span><br><span class="line"># 2) 在序列化类中，要完成数据库数据的校验与入库操作，可能会需要知道当前的登陆用户，但序列化类无法访问request</span><br><span class="line"># 3) 在视图类中实例化序列化对象时，将request对象传递进去</span><br></pre></td></tr></table></figure><p>视图层:views.py (使用context传递参数到序列化类中)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Book(APIView):</span><br><span class="line">    def post(self, request, *args, **kwargs):</span><br><span class="line">        book_ser = serializers.BookModelSerializer(data=request_data,context=&#123;&apos;request&apos;:request&#125;)   #视图层context传递参数</span><br><span class="line">        book_ser.is_valid(raise_exception=True)</span><br><span class="line">        book_result = book_ser.save()</span><br><span class="line">        return Response(&#123;</span><br><span class="line">            &apos;status&apos;: 0,</span><br><span class="line">            &apos;msg&apos;: &apos;ok&apos;,</span><br><span class="line">            &apos;results&apos;: serializers.BookModelSerializer(book_result).data</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure><p>序列化层：serializers.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class BookModelSerializer(ModelSerializer):</span><br><span class="line">    class Meta:</span><br><span class="line">        model = models.Book</span><br><span class="line">        fields = (&apos;name&apos;, &apos;price&apos;)</span><br><span class="line">    def validate_name(self, value):</span><br><span class="line">        print(self.context.get(&apos;request&apos;).method)  #序列化层接收参数</span><br><span class="line">        return value</span><br></pre></td></tr></table></figure><h2 id="二次封装Response类便于以后每次使用Response"><a href="#二次封装Response类便于以后每次使用Response" class="headerlink" title="二次封装Response类便于以后每次使用Response"></a>二次封装Response类便于以后每次使用Response</h2><p>自定义APIResponse</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.response import Response</span><br><span class="line"></span><br><span class="line">class APIResponse(Response):</span><br><span class="line">    def __init__(self, data_status=0, data_msg=&apos;ok&apos;, results=None, http_status=None, headers=None, exception=False, **kwargs):</span><br><span class="line">        # data的初始状态：状态码与状态信息</span><br><span class="line">        data = &#123;</span><br><span class="line">            &apos;status&apos;: data_status,</span><br><span class="line">            &apos;msg&apos;: data_msg,</span><br><span class="line">        &#125;</span><br><span class="line">        # data的响应数据体</span><br><span class="line">        # results可能是False、0等数据，这些数据某些情况下也会作为合法数据返回</span><br><span class="line">        if results is not None:</span><br><span class="line">            data[&apos;results&apos;] = results</span><br><span class="line">        # data响应的其他内容</span><br><span class="line">        # if kwargs is not None:</span><br><span class="line">        #     for k, v in kwargs.items():</span><br><span class="line">        #         setattr(data, k, v)</span><br><span class="line">        data.update(kwargs)</span><br><span class="line"></span><br><span class="line">        super().__init__(data=data, status=http_status, headers=headers, exception=exception)   #重写父类Response的__init__方法</span><br></pre></td></tr></table></figure><h1 id="视图家族"><a href="#视图家族" class="headerlink" title="视图家族"></a>视图家族</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">views：视图</span><br><span class="line">generics：工具视图</span><br><span class="line">mixins：视图工具集</span><br><span class="line">viewsets：视图集</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">学习曲线</span><br><span class="line">APIView =&gt; GenericAPIView =&gt; mixins的五大工具类 =&gt; generics中的工具视图 =&gt; viewsets中的视图集</span><br></pre></td></tr></table></figure><h2 id="两个视图基类-APIView和GenericAPIView"><a href="#两个视图基类-APIView和GenericAPIView" class="headerlink" title="两个视图基类  APIView和GenericAPIView"></a>两个视图基类 <strong>APIView和GenericAPIView</strong></h2><h3 id="1-AIPView"><a href="#1-AIPView" class="headerlink" title="1. AIPView"></a>1. AIPView</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.views import APIView</span><br><span class="line"></span><br><span class="line">APIView是REST framework提供的所有视图的基类，继承自Django的View父类。</span><br><span class="line"></span><br><span class="line">APIView与View的不同之处在于：</span><br><span class="line"></span><br><span class="line">1.传入到视图方法中的是REST framework的Request对象，而不是Django的HttpRequeset对象；</span><br><span class="line">2.视图方法可以返回REST framework的Response对象，视图会为响应数据设置（render）符合前端要求的格式；</span><br><span class="line">3.任何APIException异常都会被捕获到，并且处理成合适的响应信息；</span><br><span class="line">4.在进行dispatch()分发前，会对请求进行身份认证、权限检查、流量控制。</span><br><span class="line"></span><br><span class="line">支持定义的属性：</span><br><span class="line">authentication_classes 列表或元祖，身份认证类</span><br><span class="line">permissoin_classes 列表或元祖，权限检查类</span><br><span class="line">throttle_classes 列表或元祖，流量控制类</span><br></pre></td></tr></table></figure><p>在APIView中仍有get(),post()等其他请求方式的方法</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.views import APIView</span><br><span class="line">from rest_framework.response import Response</span><br><span class="line"> </span><br><span class="line"># url(r&apos;^books/$&apos;, views.BookListView.as_view()),</span><br><span class="line">class BookListView(APIView):</span><br><span class="line">    def get(self, request):</span><br><span class="line">        books = BookInfo.objects.all()</span><br><span class="line">        serializer = BookInfoSerializer(books, many=True)</span><br><span class="line">        return Response(serializer.data)</span><br></pre></td></tr></table></figure><h3 id="2-GenericAPIView通用视图类"><a href="#2-GenericAPIView通用视图类" class="headerlink" title="2. GenericAPIView通用视图类"></a>2. GenericAPIView通用视图类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GenericAPIView是继承APIView的，使用完全兼容APIView，主要增加了操作序列化器和数据库查询的方法，作用是为下面Mixin扩展类的执行提供方法支持。通常在使用时，可以配合一个或多个Mixin扩展类</span><br><span class="line">重点：GenericAPIView在APIView基础上完成了哪些事</span><br><span class="line"> 1）get_queryset()：从类属性queryset中获得model的queryset数据                                群操作就走get_queryset()方法(包括群查，群增等)</span><br><span class="line"> 2）get_object()：从类属性queryset中获得model的queryset数据，再通过有名分组pk确定唯一操作对象     单操作就走get_object()方法（包括单查，单增等）</span><br><span class="line"> 3）get_serializer()：从类属性serializer_class中获得serializer的序列化类</span><br></pre></td></tr></table></figure><p><strong>支持的属性：</strong></p><ul><li><p>列表视图与详情视图通过：</p><p>（重点<strong>**</strong>）</p><ol><li><strong>queryset</strong> 指明视图需要的数据（model查询数据）</li><li><strong>serializer_class</strong> 指明视图使用的序列化器　</li></ol></li><li><p>列表视图使用：</p></li></ul><ol><li><ol><li><strong>pagination_class</strong> 分页控制类　</li><li><strong>filter_backends</strong> 过滤控制后端　　　　　　</li></ol></li></ol><ul><li>详情页视图使用：</li></ul><ol><li><ol><li><strong>lookup_field</strong> 自定义主键 有名分组的查询，默认是’pk’</li><li><strong>lookup_url_kwarg</strong> 查询单一数据时url中的参数关键字名称，默认与look_field相同　　</li></ol></li></ol><p><strong>提供的方法：(\</strong>****)**</p><p>　　1.get_queryset() 从类属性queryset中获得model的queryset数据　　</p><p>　　2.get_object() 从类属性queryset中获得model的queryset数据，再通过有名分组pk来确定唯一操作对象。</p><p>　　3.get_serializer() 从类属性serializer_class中获得serializer的序列化类，主要用来提供给Mixin扩展类使用。</p><p><strong>get_serializer源码：</strong></p> <img src="/posts/30ccd969/image-20200426090152366.png" title="get_serializer源码"><p><strong>举例：</strong></p><p><strong>视图层：views.py</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.generics import GenericAPIView</span><br><span class="line">class BookGenericAPIView(GenericAPIView):</span><br><span class="line">    queryset = models.Book.objects.filter(is_delete=False)</span><br><span class="line">    serializer_class = serializers.BookModelSerializer</span><br><span class="line">    lookup_field = &apos;pk&apos;     #先定义好，单查可以使用，默认是pk  自定义主键的有名分组，如果路由有名分组不是pk,这个属性就要自己设置了</span><br><span class="line">    # 群取</span><br><span class="line">    def get(self, request, *args, **kwargs):</span><br><span class="line">        book_query = self.get_queryset()       #获取queryset数据（model查询数据）</span><br><span class="line">        book_ser = self.get_serializer(book_query, many=True)</span><br><span class="line">        book_data = book_ser.data</span><br><span class="line">        return APIResponse(results=book_data)</span><br><span class="line"></span><br><span class="line">    # 单取</span><br><span class="line">    def get(self, request, *args, **kwargs):</span><br><span class="line">        book_query = self.get_object()</span><br><span class="line">        book_ser = self.get_serializer(book_query)</span><br><span class="line">        book_data = book_ser.data</span><br><span class="line">        return APIResponse(results=book_data)</span><br></pre></td></tr></table></figure><p><strong>路由层：urls.py</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(r&apos;^v2/books/$&apos;, views.BookGenericAPIView.as_view()),</span><br><span class="line">    url(r&apos;^v2/books/(?P&lt;pk&gt;.*)/$&apos;, views.BookGenericAPIView.as_view()),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h2 id="五个视图扩展类-mixins视图工具集-辅助GenericAPIView"><a href="#五个视图扩展类-mixins视图工具集-辅助GenericAPIView" class="headerlink" title="五个视图扩展类 mixins视图工具集-辅助GenericAPIView"></a>五个视图扩展类 mixins<strong>视图工具集</strong>-辅助GenericAPIView</h2><p>作用：提供了几种后端视图（对数据资源的增删改查）处理流程的实现，如果需要编写的视图属于这五种，则视图可以通过继承相应的扩展类来复用代码，减少自己编写的代码量。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）mixins有五个工具类文件，一共提供了五个工具类，六个工具方法：单查、群查、单增、单删、单整体改、单局部改</span><br><span class="line">2）继承工具类可以简化请求函数的实现体，但是必须继承GenericAPIView，需要GenericAPIView类提供序列化器与数据库查询的方法(见上方GenericAPIView基类知识点)</span><br><span class="line">3）工具类的工具方法返回值都是Response类型对象，如果要格式化数据格式再返回给前台，可以通过 response.data 拿到工具方法返回的Response类型对象的响应数据</span><br></pre></td></tr></table></figure><p><strong>五个工具类</strong>：CreateModelMixin（增加）,DestroyModelMixin（删除）,ListModelMixin（查询,查queryset）,RetrieveModelMixin（查询，查对象，针对于存在”pk”）,UpdateModelMixin（修改）</p><p><strong>1.ListModelMixin（群查）</strong></p><p>列表视图扩展类，提供 <strong>list</strong> 方法快速实现查询视图，返回200状态码。除了查询，该<strong>list</strong>方法会对数据进行过滤和分页<strong></strong></p><p><strong>2.CreateModelMixin（单增） #注意：没有群增的方法，需要自己手动写（\</strong>****）**</p><p>创建视图扩展类，提供<strong>create</strong>方法快速创建资源的视图，成功返回201的状态码</p><p><strong>3.RetrieveModelMixin(单查)</strong></p><p>详情视图扩展类，提供<strong>retrieve</strong>方法，可以快速实现返回一个存在的数据对象。</p><p><strong>4.UpdateModelMixin(更新，修改) #只有单整体改和单局部改，没有群整体改和群局部改</strong></p><p>更新视图扩展类，提供<strong>update</strong>方法，可以快速实现更新一个存在的数据对象，同时也提供<strong>partial_update</strong>方法，可以实现局部更新。</p><p><strong>5.DestoryModelMixin(删除) 一般不怎么用到</strong></p><p>删除视图扩展类，提供<strong>destory</strong>方法，可以快速实现删除一个存在数据对象。</p><p><strong>代码示例：</strong></p><p>视图层：views.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin</span><br><span class="line">class BookMixinGenericAPIView(ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, GenericAPIView):</span><br><span class="line">　　#GenericAPIView提供的序列化器和查询的数据</span><br><span class="line">    queryset = models.Book.objects.filter(is_delete=False)  </span><br><span class="line">    serializer_class = serializers.BookModelSerializer</span><br><span class="line">　　</span><br><span class="line">　　#单查和群查</span><br><span class="line">    def get(self, request, *args, **kwargs):</span><br><span class="line">        if &apos;pk&apos; in kwargs:</span><br><span class="line">            response = self.retrieve(request, *args, **kwargs)   #单查  RetrieveModelMixin方法</span><br><span class="line">        else:</span><br><span class="line">            # mixins提供的list方法的响应对象是Response，将该对象格式化为自定义的APIResponse</span><br><span class="line">            response = self.list(request, *args, **kwargs)   #群查 ListModelMixin</span><br><span class="line">        # response的数据都存放在response.data中</span><br><span class="line">        return APIResponse(results=response.data)    </span><br><span class="line">　　#单增</span><br><span class="line">    def post(self, request, *args, **kwargs):</span><br><span class="line">        response = self.create(request, *args, **kwargs)   #CreateModelMixin方法</span><br><span class="line">        return APIResponse(results=response.data)</span><br><span class="line">　　#单整体修改</span><br><span class="line">    def put(self, request, *args, **kwargs):</span><br><span class="line">        response = self.update(request, *args, **kwargs)   #UpdateModelMixin</span><br><span class="line">        return APIResponse(results=response.data)</span><br><span class="line">　　#单局部修改</span><br><span class="line">    def patch(self, request, *args, **kwargs):</span><br><span class="line">        response = self.partial_update(request, *args, **kwargs)</span><br><span class="line">        return APIResponse(results=response.data)</span><br></pre></td></tr></table></figure><p>路由层：urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">       url(r&apos;^v3/books/$&apos;, views.BookMixinGenericAPIView.as_view()),</span><br><span class="line">    url(r&apos;^v3/books/(?P&lt;pk&gt;.*)/$&apos;, views.BookMixinGenericAPIView.as_view()),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h2 id="常用功能子类视图-工具视图-继承了GenericAPIView和各种Mixins工具类"><a href="#常用功能子类视图-工具视图-继承了GenericAPIView和各种Mixins工具类" class="headerlink" title="常用功能子类视图  工具视图(继承了GenericAPIView和各种Mixins工具类)"></a>常用功能子类视图 <strong>工具视图(继承了GenericAPIView和各种Mixins工具类)</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1）工具视图都是GenericAPIView的子类，且不同的子类继承了不同的工具类</span><br><span class="line">2）工具视图的功能可以满足需求，只需要继承工具视图，并且提供queryset与serializer_class即可</span><br></pre></td></tr></table></figure><table><thead><tr><th>视图</th><th>作用</th><th>可使用方法</th><th>父类</th></tr></thead><tbody><tr><td>ListAPIView</td><td>查询多条数据</td><td>get</td><td>GenericAPIView ListModelMixin</td></tr><tr><td>CreateAPIView</td><td>新增一条数据</td><td>post</td><td>GenericAPIView CreateModelMixin</td></tr><tr><td>RetrieveAPIView</td><td>查询一条数据</td><td>get</td><td>GenericAPIView RetrieveModelMixin</td></tr><tr><td>UpdateAPIView</td><td>修改一条数据</td><td>put，patch</td><td>GenericAPIView UpdateModelMixin</td></tr><tr><td>DestroyAPIView</td><td>删除一条数据</td><td>delete</td><td>GenericAPIView DestroyModelMixin</td></tr><tr><td>RetrieveUpdateAPIView</td><td>单查，更新一条数据</td><td>get，put，patch</td><td>GenericAPIView RetrieveModelMixin UpdateModelMixin</td></tr><tr><td>RetrieveUpdateDestroyAPIView</td><td>单查，更新，删除一条数据</td><td>get，put，patch，delete</td><td>GenericAPIView RetrieveModelMixin UpdateModelMixin DestroyModelMixin</td></tr><tr><td>ListCreateAPIView</td><td>群查，更新一条</td><td>get,post</td><td>GenericAPIView CreateModelMixin ListModelMixin</td></tr></tbody></table><p>视图层：views.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.generics import ListCreateAPIView, UpdateAPIView</span><br><span class="line">class BookListCreatePIView(ListCreateAPIView, UpdateAPIView):</span><br><span class="line">    queryset = models.Book.objects.filter(is_delete=False)</span><br><span class="line">    serializer_class = serializers.BookModelSerializer</span><br></pre></td></tr></table></figure><p>路由层：urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">       url(r&apos;^v4/books/$&apos;, views.BookListCreatePIView.as_view()),</span><br><span class="line">    url(r&apos;^v4/books/(?P&lt;pk&gt;.*)/$&apos;, views.BookListCreatePIView.as_view()),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h2 id="视图集-viewsetmixin-（注意路由设置）"><a href="#视图集-viewsetmixin-（注意路由设置）" class="headerlink" title="视图集 viewsetmixin （注意路由设置）"></a>视图集 viewsetmixin （注意路由设置）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.常用视图集父类</span><br><span class="line">　　ViewSet</span><br><span class="line">　　继承自APIView和ViewSetMixin,没有提供任何方法，需要自己写</span><br><span class="line">　　GenericViewSet</span><br><span class="line">　　继承GenericAPIView和ViewSetMixin,其中GenericAPIView提供了基础方法，可以直接搭配Mixin扩展类使用，所以我们选这个</span><br><span class="line">　　ModelViewSet　　</span><br><span class="line">　　继承GenericViewset,但同时也包括ListModelMixin、CreateModelMixin等mixin扩展类</span><br><span class="line">1）视图集都是默认优先继承ViewSetMixin类，再继承一个视图类（GenericAPIView或APIView） </span><br><span class="line"> 2）ViewSetMixin提供了重写的as_view()方法，继承视图集的视图类，配置路由时调用as_view()必须传入 请求名-函数名 映射关系字典</span><br><span class="line">       eg: url(r&apos;^v5/books/$&apos;, views.BookGenericViewSet.as_view(&#123;&apos;get&apos;: &apos;my_get_list&apos;&#125;)),</span><br><span class="line">       表示get请求会交给my_get_list视图函数处理</span><br></pre></td></tr></table></figure><p>路由层：urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">       # View的as_view()：将get请求映射到视图类的get方法</span><br><span class="line">    # ViewSet的as_view(&#123;&apos;get&apos;: &apos;my_get_list&apos;&#125;)：将get请求映射到视图类的my_get_list方法</span><br><span class="line">    url(r&apos;^v5/books/$&apos;, views.BookGenericViewSet.as_view(&#123;&apos;get&apos;: &apos;my_get_list&apos;&#125;)),</span><br><span class="line">    url(r&apos;^v5/books/(?P&lt;pk&gt;.*)/$&apos;, views.BookGenericViewSet.as_view(&#123;&apos;get&apos;: &apos;my_get_obj&apos;&#125;)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>视图层：views.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.viewsets import GenericViewSet</span><br><span class="line">from rest_framework import mixins  #工具集 可以使用list,retrieve等方法</span><br><span class="line">class BookGenericViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet):</span><br><span class="line">    queryset = models.Book.objects.filter(is_delete=False)</span><br><span class="line">    serializer_class = serializers.BookModelSerializer</span><br><span class="line"></span><br><span class="line">    def my_get_list(self, request, *args, **kwargs):</span><br><span class="line">        return self.list(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">    def my_get_obj(self, request, *args, **kwargs):</span><br><span class="line">        return self.retrieve(request, *args, **kwargs)</span><br></pre></td></tr></table></figure><p>GenericAPIView与APIView两大继承视图的区别</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1）GenericViewSet和ViewSet都继承了ViewSetMixin，as_view都可以配置 请求-函数 映射</span><br><span class="line">2）GenericViewSet继承的是GenericAPIView视图类，用来完成标准的 model 类操作接口</span><br><span class="line">3）ViewSet继承的是APIView视图类，用来完成不需要 model 类参与，或是非标准的 model 类操作接口</span><br><span class="line">      post请求在标准的 model 类操作下就是新增接口，登陆的post不满足</span><br><span class="line">      post请求验证码的接口，不需要 model 类的参与</span><br><span class="line">案例：登陆的post请求，并不是完成数据的新增，只是用post提交数据，得到的结果也不是登陆的用户信息，而是登陆的认证信息</span><br></pre></td></tr></table></figure><h2 id="工具视图集-（工具集和视图集的混合使用）"><a href="#工具视图集-（工具集和视图集的混合使用）" class="headerlink" title="工具视图集 （工具集和视图集的混合使用）"></a>工具视图集 （工具集和视图集的混合使用）</h2><p>路由层：urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">  url(r&apos;^v6/books/$&apos;, views.BookModelViewSet.as_view(&#123;&apos;get&apos;: &apos;list&apos;, &apos;post&apos;: &apos;create&apos;&#125;)),</span><br><span class="line">  url(r&apos;^v6/books/(?P&lt;pk&gt;.*)/$&apos;, views.BookModelViewSet.as_view(&#123;&apos;get&apos;: &apos;retrieve&apos;, &apos;put&apos;: &apos;update&apos;, &apos;patch&apos;: &apos;partial_update&apos;, &apos;delete&apos;: &apos;destroy&apos;&#125;)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>视图层：views.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.viewsets import ModelViewSet</span><br><span class="line">class BookModelViewSet(ModelViewSet):</span><br><span class="line">    queryset = models.Book.objects.filter(is_delete=False)</span><br><span class="line">    serializer_class = serializers.BookModelSerializer</span><br><span class="line"></span><br><span class="line">    # 删不是数据库，而是该记录中的删除字段</span><br><span class="line">    def destroy(self, request, *args, **kwargs):</span><br><span class="line">        instance = self.get_object()  # type: models.Book</span><br><span class="line">        if not instance:</span><br><span class="line">            return APIResponse(1, &apos;删除失败&apos;)  # 实际操作，在此之前就做了判断</span><br><span class="line">        instance.is_delete = True</span><br><span class="line">        instance.save()</span><br><span class="line">        return APIResponse(0, &apos;删除成功&apos;)</span><br></pre></td></tr></table></figure><h2 id="路由组件（了解）"><a href="#路由组件（了解）" class="headerlink" title="路由组件（了解）"></a>路由组件（了解）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from django.conf.urls import include</span><br><span class="line">from rest_framework.routers import SimpleRouter</span><br><span class="line">router = SimpleRouter()</span><br><span class="line"># 所有路由与ViewSet视图类的都可以注册，会产生 &apos;^v6/books/$&apos; 和 &apos;^v6/books/(?P&lt;pk&gt;[^/.]+)/$&apos;</span><br><span class="line">router.register(&apos;v6/books&apos;, views.BookModelViewSet)</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    # 第一种添加子列表方式</span><br><span class="line">    url(r&apos;^&apos;, include(router.urls)),</span><br><span class="line">]</span><br><span class="line"># 第二种添加子列表方式</span><br><span class="line"># urlpatterns.extend(router.urls)</span><br></pre></td></tr></table></figure></div><div><div><div style="text-align:center;color:#555;font-size:14px">-------------The End-------------</div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/DRF/" rel="tag"><i class="fa fa-tag"></i> DRF</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/posts/36678e14.html" rel="next" title="DRF框架 (四)"><i class="fa fa-chevron-left"></i> DRF框架 (四)</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"></div></div></footer></div></article></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Xie"><p class="site-author-name" itemprop="name">Xie</p><p class="site-description motion-element" itemprop="description">Xie·Yu's blog.</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">29</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">5</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">9</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/ixieyu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:hexohe@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#复习"><span class="nav-number">1.</span> <span class="nav-text">复习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#视图类views-py使用context传递参数给序列化类serializers-py"><span class="nav-number">1.1.</span> <span class="nav-text">视图类views.py使用context传递参数给序列化类serializers.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二次封装Response类便于以后每次使用Response"><span class="nav-number">1.2.</span> <span class="nav-text">二次封装Response类便于以后每次使用Response</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图家族"><span class="nav-number">2.</span> <span class="nav-text">视图家族</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#两个视图基类-APIView和GenericAPIView"><span class="nav-number">2.1.</span> <span class="nav-text">两个视图基类 APIView和GenericAPIView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-AIPView"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. AIPView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-GenericAPIView通用视图类"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. GenericAPIView通用视图类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五个视图扩展类-mixins视图工具集-辅助GenericAPIView"><span class="nav-number">2.2.</span> <span class="nav-text">五个视图扩展类 mixins视图工具集-辅助GenericAPIView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用功能子类视图-工具视图-继承了GenericAPIView和各种Mixins工具类"><span class="nav-number">2.3.</span> <span class="nav-text">常用功能子类视图 工具视图(继承了GenericAPIView和各种Mixins工具类)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图集-viewsetmixin-（注意路由设置）"><span class="nav-number">2.4.</span> <span class="nav-text">视图集 viewsetmixin （注意路由设置）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具视图集-（工具集和视图集的混合使用）"><span class="nav-number">2.5.</span> <span class="nav-text">工具视图集 （工具集和视图集的混合使用）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由组件（了解）"><span class="nav-number">2.6.</span> <span class="nav-text">路由组件（了解）</span></a></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; 2018 – <span itemprop="copyrightYear">2020</span><span class="with-love" id="animate"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">Xie</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span title="站点总字数">76k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-coffee"></i></span> <span title="站点阅读时长">1:09</span></div> <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("10/30/2018 18:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站已安全运行"+dnum+"天",document.getElementById("times").innerHTML=hnum+"小时"+mnum+"分"+snum+"秒"}setInterval("createtime()",250)</script></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script><script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script><script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script></body></html><script type="text/javascript" src="/js/src/click.js"></script>
