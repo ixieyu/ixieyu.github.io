@@ -1,0 +1,319 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico?v=6.4.2"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico?v=6.4.2"><link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"6.4.2",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><script>!function(e,t,o,c,i,a,n){e.DaoVoiceObject=i,e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date,a=t.createElement(o),n=t.getElementsByTagName(o)[0],a.async=1,a.src=c,a.charset="utf-8",n.parentNode.insertBefore(a,n)}(window,document,"script",("https:"==document.location.protocol?"https:":"http:")+"//widget.daovoice.io/widget/0f81ff2f.js","daovoice"),daovoice("init",{app_id:"31abce90"}),daovoice("update")</script><meta name="description" content="drf认证组件"><meta name="keywords" content="DRF"><meta property="og:type" content="article"><meta property="og:title" content="DRF框架 (六)"><meta property="og:url" content="http://ixieyu.top/posts/a9c3911b.html"><meta property="og:site_name" content="X&#39;s BLOG"><meta property="og:description" content="drf认证组件"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2020-04-27T01:59:51.698Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="DRF框架 (六)"><meta name="twitter:description" content="drf认证组件"><link rel="canonical" href="http://ixieyu.top/posts/a9c3911b.html"><script type="text/javascript" id="page.configurations">CONFIG.page={sidebar:""}</script><title>DRF框架 (六) | X's BLOG</title><noscript><style type="text/css">.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.logo-line-after i{right:initial}</style></noscript></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">X's BLOG</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">我们从小就开始学说话，然后再用一辈子去说话！</p></div><div class="site-nav-toggle"> <button aria-label="切换导航栏"><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i><br>日程表</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><div class="reading-progress-bar"></div><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://ixieyu.top/posts/a9c3911b.html"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="Xie"><meta itemprop="description" content="Xie·Yu's blog."><meta itemprop="image" content="/images/header.jpg"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="X's BLOG"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">DRF框架 (六)</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2020-04-27 09:40:36 / 修改时间：09:59:51" itemprop="dateCreated datePublished" datetime="2020-04-27T09:40:36+08:00">2020-04-27</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/DRF框架/" itemprop="url" rel="index"><span itemprop="name">DRF框架</span></a></span></span></div></header><div class="post-body" itemprop="articleBody"><h1 id="drf认证组件"><a href="#drf认证组件" class="headerlink" title="drf认证组件"></a>drf认证组件</h1><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">用户信息表</span><br><span class="line">from django.db import models</span><br><span class="line">from django.contrib.auth.models import AbstractUser</span><br><span class="line">class User(AbstractUser):</span><br><span class="line">    mobile = models.CharField(max_length=11,unique=True)</span><br><span class="line"></span><br><span class="line">    class Meta:</span><br><span class="line">        db_table = &apos;user&apos;</span><br><span class="line">        verbose_name = &apos;用户表&apos;</span><br><span class="line">        verbose_name_plural = verbose_name</span><br><span class="line"></span><br><span class="line">    def __str__(self):</span><br><span class="line">        return self.username</span><br></pre></td></tr></table></figure><p><strong>源码分析</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1.从APIView的dispath(self, request, *args, **kwargs)下手</span><br><span class="line">2.dispath方法内 self.initial(request, *args, **kwargs) 进入三大认证</span><br><span class="line">    认证组件：校验用户 —游客、合法用户、非法用户</span><br><span class="line">    # 游客：代表校验通过，直接进入下一步校验（权限校验）</span><br><span class="line">    # 合法用户：代表校验通过，将用户存储在request.user中，再进入下一步校验（权限校验）</span><br><span class="line">    # 非法用户：代表校验失败，抛出异常，返回403权限异常结果</span><br><span class="line">    self.perform_authentication(request)  #认证组件</span><br><span class="line">    </span><br><span class="line">      权限组件：校验用户权限 - 必须登录、所有用户、登录之后读写，游客只读、自定义用户角色</span><br><span class="line">    # 认证通过：可以进入下一步校验（频率认证）</span><br><span class="line">    # 认证失败：抛出异常，返回403权限异常结果</span><br><span class="line">    self.check_permissions(request)   #权限组件</span><br><span class="line">    </span><br><span class="line">     频率组件：限制视图接口被访问的频率次数 - 限制的条件(IP、id、唯一键)、频率周期时间(s、m、h)、频率的次数（3/s）</span><br><span class="line">    # 没有达到限次：正常访问接口</span><br><span class="line">    # 达到限次：限制时间内不能访问，限制时间达到后，可以重新访问</span><br><span class="line">    self.check_throttles(request)   #频率组件</span><br></pre></td></tr></table></figure><h2 id="分两方面-a-b"><a href="#分两方面-a-b" class="headerlink" title="分两方面:a,b"></a>分两方面:a,b</h2><h3 id="（a）-在initial方法上面——这个是源码settings文件配置认证组件的地方"><a href="#（a）-在initial方法上面——这个是源码settings文件配置认证组件的地方" class="headerlink" title="（a）:在initial方法上面——这个是源码settings文件配置认证组件的地方"></a><strong>（a）:</strong>在initial方法上面——这个是源码settings文件配置认证组件的地方</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def initialize_request(self, request, *args, **kwargs):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Returns the initial request object.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        parser_context = self.get_parser_context(request)</span><br><span class="line"></span><br><span class="line">        return Request(</span><br><span class="line">            request,</span><br><span class="line">            parsers=self.get_parsers(),</span><br><span class="line">            authenticators=self.get_authenticators(),</span><br><span class="line">            negotiator=self.get_content_negotiator(),</span><br><span class="line">            parser_context=parser_context</span><br><span class="line">        )</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def get_authenticators(self):</span><br><span class="line">   </span><br><span class="line">    return [auth() for auth in self.authentication_classes]</span><br></pre></td></tr></table></figure><p>源码settings.py文件中APISettings类</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_AUTHENTICATION_CLASSES&apos;: [</span><br><span class="line">        &apos;rest_framework.authentication.SessionAuthentication&apos;,  #session认证</span><br><span class="line">        &apos;rest_framework.authentication.BasicAuthentication&apos;   #基础认证</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure><h3 id="b-self-inital-self-request-args-kwargs-包含认证，权限，频率三大组件"><a href="#b-self-inital-self-request-args-kwargs-包含认证，权限，频率三大组件" class="headerlink" title="(b): self.inital(self,request,*args,**kwargs)  包含认证，权限，频率三大组件"></a><strong>(b):</strong> self.inital(self,request,*args,**kwargs) 包含认证，权限，频率三大组件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def initial(self, request, *args, **kwargs):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Runs anything that needs to occur prior to calling the method handler.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.format_kwarg = self.get_format_suffix(**kwargs)</span><br><span class="line"></span><br><span class="line">        # Perform content negotiation and store the accepted info on the request</span><br><span class="line">        neg = self.perform_content_negotiation(request)</span><br><span class="line">        request.accepted_renderer, request.accepted_media_type = neg</span><br><span class="line"></span><br><span class="line">        # Determine the API version, if versioning is in use.</span><br><span class="line">        version, scheme = self.determine_version(request, *args, **kwargs)</span><br><span class="line">        request.version, request.versioning_scheme = version, scheme</span><br><span class="line"></span><br><span class="line">        # Ensure that the incoming request is permitted</span><br><span class="line">        self.perform_authentication(request)  #认证</span><br><span class="line">        self.check_permissions(request)  #权限</span><br><span class="line">        self.check_throttles(request)  #频率</span><br></pre></td></tr></table></figure><h3 id="（b—1）-self-perform-authentication-request-认证"><a href="#（b—1）-self-perform-authentication-request-认证" class="headerlink" title="（b—1）:  self.perform_authentication(request)   认证"></a><strong>（b—1）:</strong> self.perform_authentication(request) 认证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def perform_authentication(self, request):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Perform authentication on the incoming request.</span><br><span class="line"></span><br><span class="line">        Note that if you override this and simply &apos;pass&apos;, then authentication</span><br><span class="line">        will instead be performed lazily, the first time either</span><br><span class="line">        `request.user` or `request.auth` is accessed.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        request.user</span><br></pre></td></tr></table></figure><h3 id="（b—2）-Request类的-方法属性-user-的get方法"><a href="#（b—2）-Request类的-方法属性-user-的get方法" class="headerlink" title="（b—2）:Request类的 方法属性  user  的get方法"></a><strong>（b—2）:</strong>Request类的 方法属性 user 的get方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@property</span><br><span class="line">    def user(self):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Returns the user associated with the current request, as authenticated</span><br><span class="line">        by the authentication classes provided to the request.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if not hasattr(self, &apos;_user&apos;):</span><br><span class="line">            with wrap_attributeerrors():</span><br><span class="line">                self._authenticate()</span><br><span class="line">        return self._user</span><br></pre></td></tr></table></figure><h3 id="b—3-self-authenticate"><a href="#b—3-self-authenticate" class="headerlink" title="(b—3):self._authenticate()"></a><strong>(b—3):</strong>self._authenticate()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">认证的细则：</span><br><span class="line">    # 做认证</span><br><span class="line">    def _authenticate(self):  #这里的self就是request</span><br><span class="line">        # 遍历拿到一个个认证器，进行认证</span><br><span class="line">        # self.authenticators配置的一堆认证类产生的认证类对象组成的 list</span><br><span class="line">　　　　 # 即：[auth() for auth in self.authentication_classes]</span><br><span class="line">        for authenticator in self.authenticators:</span><br><span class="line">            try:</span><br><span class="line">                # 认证器(对象)调用认证方法authenticate(认证类对象self, request请求对象)</span><br><span class="line">                # 返回值：登陆的用户与认证的信息组成的 tuple</span><br><span class="line">                # 该方法被try包裹，代表该方法会抛异常，抛异常就代表认证失败</span><br><span class="line">                user_auth_tuple = authenticator.authenticate(self)</span><br><span class="line">            except exceptions.APIException:</span><br><span class="line">                self._not_authenticated()</span><br><span class="line">                raise</span><br><span class="line"></span><br><span class="line">            # 返回值的处理</span><br><span class="line">            if user_auth_tuple is not None:</span><br><span class="line">                self._authenticator = authenticator</span><br><span class="line">                # 如何有返回值，就将 登陆用户 与 登陆认证 分别保存到 request.user、request.auth</span><br><span class="line">                self.user, self.auth = user_auth_tuple</span><br><span class="line">                return</span><br><span class="line">        # 如果返回值user_auth_tuple为空，代表认证通过，但是没有 登陆用户 与 登陆认证信息，代表游客</span><br><span class="line">        self._not_authenticated()</span><br></pre></td></tr></table></figure><h1 id="自定义认证类"><a href="#自定义认证类" class="headerlink" title="自定义认证类"></a>自定义认证类</h1><p>从源码的settings文件可以看出,认证类需要继承BasicAuthentication(在authentication.py文件)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_AUTHENTICATION_CLASSES&apos;: [</span><br><span class="line">        &apos;rest_framework.authentication.SessionAuthentication&apos;,  #会重新开启CSRF认证</span><br><span class="line">        &apos;rest_framework.authentication.BasicAuthentication&apos;</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1) 创建继承BaseAuthentication的认证类</span><br><span class="line">2) 重写authenticate方法</span><br><span class="line">3) 实现体根据认证规则 确定游客、非法用户、合法用户 （根据自己的认证规则）</span><br><span class="line">4) 进行全局或局部配置</span><br><span class="line"></span><br><span class="line">认证规则</span><br><span class="line">i.没有认证信息返回None(游客)</span><br><span class="line">ii.有认证信息认证失败抛异常(非法用户)</span><br><span class="line">iii.有认证信息认证成功返回用户与认证信息元组(合法用户)</span><br></pre></td></tr></table></figure><p>utils.authentications.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"># 1）继承BaseAuthentication类</span><br><span class="line"># 2）重写authenticate(self, request)方法，自定义认证规则</span><br><span class="line"># 3）自定义认证规则基于的条件：</span><br><span class="line">#       没有认证信息返回None(游客)</span><br><span class="line">#       有认证信息认证失败抛异常(非法用户)</span><br><span class="line">#       有认证信息认证成功返回用户与认证信息元组(合法用户)</span><br><span class="line"># 4）完全视图类的全局(settings文件中)或局部(确切的视图类)配置</span><br><span class="line"></span><br><span class="line">from rest_framework.authentication import BaseAuthentication</span><br><span class="line">from rest_framework.exceptions import AuthenticationFailed   #异常接收</span><br><span class="line">from app01 import models</span><br><span class="line"></span><br><span class="line">#继承BaseAuthentication</span><br><span class="line">class MyAuthentication(BaseAuthentication):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">        同前台请求头拿认证信息auth（获取认证的字段要与前台约定）</span><br><span class="line">        没有auth是游客，返回None</span><br><span class="line">        有auth进行校验</span><br><span class="line">            失败是非法用户，抛出异常</span><br><span class="line">            成功是合法用户，返回 (用户, 认证信息)</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def authenticate(self, request):   #重写authenticate方法</span><br><span class="line">　　　　#前台在请求头携带认证信息，</span><br><span class="line">　　　　#且默认规范用 Authorization 字段携带认证信息，</span><br><span class="line">　　　　#后台固定在请求对象的META字段中 HTTP_AUTHORIZATION 获取</span><br><span class="line">        #认证信息auth</span><br><span class="line">        auth = request.META.get(&apos;HTTP_AUTHORIZATION&apos;,None)#处理游客</span><br><span class="line">        if auth is None:</span><br><span class="line">            return None</span><br><span class="line">        #设置认证字段小规则(两段式):&quot;auth 认证字符串&quot; 在BasicAuthentication类中有规则范式</span><br><span class="line">        auth_list = auth.split()     #校验是否还是非法用户,不是两段，第一段不是auth就是非法用户</span><br><span class="line">        if not (len(auth_list) == 2 and auth_list[0].lower() == &apos;auth&apos;):</span><br><span class="line">            raise AuthenticationFailed(&apos;认证信息有误，非法用户&apos;)  #抛异常</span><br><span class="line"></span><br><span class="line">        #校验认证信息第二段从auth_list[1]中解析出来</span><br><span class="line">        # 注：假设一种情况，信息为abc.123.xyz，就可以解析出admin用户；实际开发，该逻辑一定是校验用户的正常逻辑</span><br><span class="line">        if auth_list[1] != &apos;abc.123.xyz&apos;: #校验失败</span><br><span class="line">            raise AuthenticationFailed(&apos;信息错误，非法用户&apos;)</span><br><span class="line"></span><br><span class="line">        #最后再去数据库校验是否有此用户</span><br><span class="line">        user = models.User.objects.filter(username=&apos;admin&apos;).first()</span><br><span class="line">        if not user:</span><br><span class="line">            raise AuthenticationFailed(&apos;用户数据有误，非法用户&apos;)</span><br><span class="line"></span><br><span class="line">        return (user,None)</span><br></pre></td></tr></table></figure><p>在settings文件中配置自定义认证组件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    # 认证类配置</span><br><span class="line">    &apos;DEFAULT_AUTHENTICATION_CLASSES&apos;: [</span><br><span class="line">        &apos;utils.authentications.MyAuthentication&apos;,</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>视图层：views.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class TestAPIView(APIView):</span><br><span class="line">    def get(self, request, *args, **kwargs):</span><br><span class="line">        # 如果通过了认证组件，request.user就一定有值</span><br><span class="line">        # 游客：AnonymousUser</span><br><span class="line">        # 用户：User表中的具体用户对象</span><br><span class="line">        print(request.user)</span><br><span class="line">        return APIResponse(0, &apos;test get ok&apos;)</span><br></pre></td></tr></table></figure><p>路由层：urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(r&apos;^test/$&apos;, views.TestAPIView.as_view()),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p><strong>注意使用Postman请求：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用Postman的get请求，在自定义认证组件获取用户，在views视图通过request.user能打印出来</span><br></pre></td></tr></table></figure><p><strong>注意配置：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">认证组件一般都是自定义的，不会使用原始的，自定义好需要在settings配置就是全局使用</span><br></pre></td></tr></table></figure><h1 id="drf权限组件"><a href="#drf权限组件" class="headerlink" title="drf权限组件"></a>drf权限组件</h1><p><strong>源码分析</strong></p><ol><li><p>从APIView的dispatch开始</p></li><li><p>dispatch 方法内 self.initial(request,*args,**kwargs)</p></li><li><p>self.initial(request,*args,**kwargs)</p></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def initial(self, request, *args, **kwargs):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Runs anything that needs to occur prior to calling the method handler.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.format_kwarg = self.get_format_suffix(**kwargs)</span><br><span class="line"></span><br><span class="line">        # Perform content negotiation and store the accepted info on the request</span><br><span class="line">        neg = self.perform_content_negotiation(request)</span><br><span class="line">        request.accepted_renderer, request.accepted_media_type = neg</span><br><span class="line"></span><br><span class="line">        # Determine the API version, if versioning is in use.</span><br><span class="line">        version, scheme = self.determine_version(request, *args, **kwargs)</span><br><span class="line">        request.version, request.versioning_scheme = version, scheme</span><br><span class="line"></span><br><span class="line">        # Ensure that the incoming request is permitted</span><br><span class="line">        self.perform_authentication(request)</span><br><span class="line">        self.check_permissions(request)  #权限组件</span><br><span class="line">        self.check_throttles(request)</span><br></pre></td></tr></table></figure><ol start="4"><li>self.check_permissions(request) 权限细节</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def check_permissions(self, request):</span><br><span class="line">        # 遍历权限对象列表得到一个个权限对象(权限器)，进行权限认证</span><br><span class="line">        for permission in self.get_permissions():</span><br><span class="line">            # 权限类一定有一个has_permission权限方法，用来做权限认证的</span><br><span class="line">            # 参数：权限对象self、请求对象request、视图类对象</span><br><span class="line">            # 返回值：有权限返回True，无权限返回False</span><br><span class="line">            if not permission.has_permission(request, self):</span><br><span class="line">                self.permission_denied(</span><br><span class="line">                    request, message=getattr(permission, &apos;message&apos;, None)</span><br><span class="line">                )</span><br></pre></td></tr></table></figure><ol start="5"><li>self.get_permissions() 获取权限类对象列表</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def get_permissions(self):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Instantiates and returns the list of permissions that this view requires.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">	return [permission() for permission in self.permission_classes]</span><br></pre></td></tr></table></figure><ol start="6"><li>self.permission_classes 获取权限settings源码配置</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DEFAULT_PERMISSION_CLASSES&apos;: [</span><br><span class="line">        &apos;rest_framework.permissions.AllowAny&apos;,  #所有权限</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure><h2 id="在源码permissions-py中的系统自带权限类，这里举例四个"><a href="#在源码permissions-py中的系统自带权限类，这里举例四个" class="headerlink" title="在源码permissions.py中的系统自带权限类，这里举例四个"></a>在源码permissions.py中的系统自带权限类，这里举例四个</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1）AllowAny： 默认是这个权限</span><br><span class="line">    认证规则全部返还True：return True</span><br><span class="line">        游客与登陆用户都有所有权限</span><br><span class="line"></span><br><span class="line">2) IsAuthenticated：  常用这个</span><br><span class="line">    认证规则必须有登陆的合法用户：return bool(request.user and request.user.is_authenticated)</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　　　　有登录用户名并且认证成功</span><br><span class="line">        游客没有任何权限，登陆用户才有权限</span><br><span class="line">    </span><br><span class="line">3) IsAdminUser：</span><br><span class="line">    认证规则必须是后台管理用户：return bool(request.user and request.user.is_staff)</span><br><span class="line">        游客没有任何权限，登陆用户才有权限</span><br><span class="line"></span><br><span class="line">4) IsAuthenticatedOrReadOnly</span><br><span class="line">    认证规则必须是只读请求或是合法用户：</span><br><span class="line">        return bool(</span><br><span class="line">            request.method in SAFE_METHODS or</span><br><span class="line">            request.user and</span><br><span class="line">            request.user.is_authenticated</span><br><span class="line">        )</span><br><span class="line">        游客只读，合法用户无限制</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAFE_METHODS = (&apos;GET&apos;, &apos;HEAD&apos;, &apos;OPTIONS&apos;)</span><br></pre></td></tr></table></figure><h2 id="权限组使用：全局使用，局部使用"><a href="#权限组使用：全局使用，局部使用" class="headerlink" title="权限组使用：全局使用，局部使用"></a><strong>权限组使用：全局使用，局部使用</strong></h2><h3 id="全局使用：默认全局配置的权限类是AllowAny-在settings文件中配置"><a href="#全局使用：默认全局配置的权限类是AllowAny-在settings文件中配置" class="headerlink" title="全局使用：默认全局配置的权限类是AllowAny,在settings文件中配置"></a>全局使用：默认全局配置的权限类是AllowAny,在settings文件中配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    # 权限类配置</span><br><span class="line">    &apos;DEFAULT_PERMISSION_CLASSES&apos;: [</span><br><span class="line">        &apos;rest_framework.permissions.AllowAny&apos;,   #默认所有权限</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="局部使用：views-py"><a href="#局部使用：views-py" class="headerlink" title="局部使用：views.py"></a>局部使用：views.py</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#只有登录后才能访问from rest_framework.permissions import IsAuthenticated</span><br><span class="line">class TestAuthenticatedAPIView(APIView):</span><br><span class="line">    permission_classes = [IsAuthenticated]</span><br><span class="line">    def get(self, request, *args, **kwargs):</span><br><span class="line">        return APIResponse(0, &apos;test 登录才能访问的接口 ok&apos;)</span><br></pre></td></tr></table></figure><h1 id="自定义权限类"><a href="#自定义权限类" class="headerlink" title="自定义权限类"></a>自定义权限类</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1) 创建继承BasePermission的权限类</span><br><span class="line">2) 实现has_permission方法</span><br><span class="line">3) 实现体根据权限规则 确定有无权限</span><br><span class="line">4) 进行全局或局部配置</span><br><span class="line"></span><br><span class="line">认证规则</span><br><span class="line">i.满足设置的用户条件，代表有权限，返回True</span><br><span class="line">ii.不满足设置的用户条件，代表有权限，返回False</span><br></pre></td></tr></table></figure><p>utils.permissions.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.permissions import BasePermission</span><br><span class="line">from django.contrib.auth.models import Group</span><br><span class="line">class MyPermission(BasePermission):</span><br><span class="line">    def has_permission(self, request, view):</span><br><span class="line">        # 只读接口判断</span><br><span class="line">        r1 = request.method in (&apos;GET&apos;, &apos;HEAD&apos;, &apos;OPTIONS&apos;)</span><br><span class="line">        # group为有权限的分组</span><br><span class="line">        group = Group.objects.filter(name=&apos;管理员&apos;).first()</span><br><span class="line">        # groups为当前用户所属的所有分组</span><br><span class="line">        groups = request.user.groups.all()</span><br><span class="line">        r2 = group and groups</span><br><span class="line">        r3 = group in groups</span><br><span class="line">        # 读接口大家都有权限，写接口必须为指定分组下的登陆用户</span><br><span class="line">        return r1 or (r2 and r3)</span><br></pre></td></tr></table></figure><p>视图层：views.py 局部使用自定义的Mypermission来做权限认证</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 游客只读，登录用户只读，只有登录用户属于 管理员 分组，才可以增删改</span><br><span class="line">from utils.permissions import MyPermission</span><br><span class="line">class TestAdminOrReadOnlyAPIView(APIView):</span><br><span class="line">    permission_classes = [MyPermission]</span><br><span class="line">    # 所有用户都可以访问</span><br><span class="line">    def get(self, request, *args, **kwargs):</span><br><span class="line">        return APIResponse(0, &apos;自定义读 OK&apos;)</span><br><span class="line">    # 必须是 自定义“管理员”分组 下的用户</span><br><span class="line">    def post(self, request, *args, **kwargs):</span><br><span class="line">        return APIResponse(0, &apos;自定义写 OK&apos;)</span><br></pre></td></tr></table></figure><p>路由层：urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(r&apos;^test3/$&apos;, views.TestAdminOrReadOnlyAPIView.as_view()),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h1 id="Postman使用"><a href="#Postman使用" class="headerlink" title="Postman使用"></a>Postman使用</h1><p>get请求：加不加Authorization，都可以读</p><p>post请求：不加Authorization，就不能进行写操作，必须要写Authorization</p></div><div><div><div style="text-align:center;color:#555;font-size:14px">-------------The End-------------</div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/DRF/" rel="tag"><i class="fa fa-tag"></i> DRF</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/posts/30ccd969.html" rel="next" title="DRF框架 (五)"><i class="fa fa-chevron-left"></i> DRF框架 (五)</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/posts/36cb8991.html" rel="prev" title="DRF框架 (七)">DRF框架 (七)<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Xie"><p class="site-author-name" itemprop="name">Xie</p><p class="site-description motion-element" itemprop="description">Xie·Yu's blog.</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">33</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">5</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">9</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/ixieyu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:hexohe@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#drf认证组件"><span class="nav-number">1.</span> <span class="nav-text">drf认证组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分两方面-a-b"><span class="nav-number">1.1.</span> <span class="nav-text">分两方面:a,b</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（a）-在initial方法上面——这个是源码settings文件配置认证组件的地方"><span class="nav-number">1.1.1.</span> <span class="nav-text">（a）:在initial方法上面——这个是源码settings文件配置认证组件的地方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-self-inital-self-request-args-kwargs-包含认证，权限，频率三大组件"><span class="nav-number">1.1.2.</span> <span class="nav-text">(b): self.inital(self,request,*args,**kwargs) 包含认证，权限，频率三大组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（b—1）-self-perform-authentication-request-认证"><span class="nav-number">1.1.3.</span> <span class="nav-text">（b—1）: self.perform_authentication(request) 认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（b—2）-Request类的-方法属性-user-的get方法"><span class="nav-number">1.1.4.</span> <span class="nav-text">（b—2）:Request类的 方法属性 user 的get方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b—3-self-authenticate"><span class="nav-number">1.1.5.</span> <span class="nav-text">(b—3):self._authenticate()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义认证类"><span class="nav-number">2.</span> <span class="nav-text">自定义认证类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#drf权限组件"><span class="nav-number">3.</span> <span class="nav-text">drf权限组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在源码permissions-py中的系统自带权限类，这里举例四个"><span class="nav-number">3.1.</span> <span class="nav-text">在源码permissions.py中的系统自带权限类，这里举例四个</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限组使用：全局使用，局部使用"><span class="nav-number">3.2.</span> <span class="nav-text">权限组使用：全局使用，局部使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局使用：默认全局配置的权限类是AllowAny-在settings文件中配置"><span class="nav-number">3.2.1.</span> <span class="nav-text">全局使用：默认全局配置的权限类是AllowAny,在settings文件中配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部使用：views-py"><span class="nav-number">3.2.2.</span> <span class="nav-text">局部使用：views.py</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义权限类"><span class="nav-number">4.</span> <span class="nav-text">自定义权限类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Postman使用"><span class="nav-number">5.</span> <span class="nav-text">Postman使用</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; 2018 – <span itemprop="copyrightYear">2020</span><span class="with-love" id="animate"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">Xie</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span title="站点总字数">114k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-coffee"></i></span> <span title="站点阅读时长">1:44</span></div> <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("10/30/2018 18:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站已安全运行"+dnum+"天",document.getElementById("times").innerHTML=hnum+"小时"+mnum+"分"+snum+"秒"}setInterval("createtime()",250)</script></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script><script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script><script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script></body></html><script type="text/javascript" src="/js/src/click.js"></script>

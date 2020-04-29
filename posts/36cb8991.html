@@ -1,0 +1,319 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico?v=6.4.2"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico?v=6.4.2"><link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"6.4.2",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><script>!function(e,t,o,c,i,a,n){e.DaoVoiceObject=i,e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date,a=t.createElement(o),n=t.getElementsByTagName(o)[0],a.async=1,a.src=c,a.charset="utf-8",n.parentNode.insertBefore(a,n)}(window,document,"script",("https:"==document.location.protocol?"https:":"http:")+"//widget.daovoice.io/widget/0f81ff2f.js","daovoice"),daovoice("init",{app_id:"31abce90"}),daovoice("update")</script><meta name="description" content="drf频率组件源码1.APIView的dispatch方法的 self.initial(request,*args,**kwargs) 点进去 2.self.check_throttles(request) 进行频率认证"><meta name="keywords" content="DRF"><meta property="og:type" content="article"><meta property="og:title" content="DRF框架 (七)"><meta property="og:url" content="http://ixieyu.top/posts/36cb8991.html"><meta property="og:site_name" content="X&#39;s BLOG"><meta property="og:description" content="drf频率组件源码1.APIView的dispatch方法的 self.initial(request,*args,**kwargs) 点进去 2.self.check_throttles(request) 进行频率认证"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2020-04-29T02:03:26.019Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="DRF框架 (七)"><meta name="twitter:description" content="drf频率组件源码1.APIView的dispatch方法的 self.initial(request,*args,**kwargs) 点进去 2.self.check_throttles(request) 进行频率认证"><link rel="canonical" href="http://ixieyu.top/posts/36cb8991.html"><script type="text/javascript" id="page.configurations">CONFIG.page={sidebar:""}</script><title>DRF框架 (七) | X's BLOG</title><noscript><style type="text/css">.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.logo-line-after i{right:initial}</style></noscript></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">X's BLOG</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle">我们从小就开始学说话，然后再用一辈子去说话！</p></div><div class="site-nav-toggle"> <button aria-label="切换导航栏"><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i><br>日程表</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><div class="reading-progress-bar"></div><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://ixieyu.top/posts/36cb8991.html"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="Xie"><meta itemprop="description" content="Xie·Yu's blog."><meta itemprop="image" content="/images/header.jpg"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="X's BLOG"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">DRF框架 (七)</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2020-04-29 09:56:35 / 修改时间：10:03:26" itemprop="dateCreated datePublished" datetime="2020-04-29T09:56:35+08:00">2020-04-29</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/DRF框架/" itemprop="url" rel="index"><span itemprop="name">DRF框架</span></a></span></span></div></header><div class="post-body" itemprop="articleBody"><h1 id="drf频率组件源码"><a href="#drf频率组件源码" class="headerlink" title="drf频率组件源码"></a>drf频率组件源码</h1><p>1.APIView的dispatch方法的 self.initial(request,*args,**kwargs) 点进去</p><p>2.self.check_throttles(request) 进行频率认证</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def initial(self, request, *args, **kwargs):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Runs anything that needs to occur prior to calling the method handler.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self.format_kwarg = self.get_format_suffix(**kwargs)</span><br><span class="line"></span><br><span class="line">        # Perform content negotiation and store the accepted info on the request</span><br><span class="line">        neg = self.perform_content_negotiation(request)</span><br><span class="line">        request.accepted_renderer, request.accepted_media_type = neg</span><br><span class="line"></span><br><span class="line">        # Determine the API version, if versioning is in use.</span><br><span class="line">        version, scheme = self.determine_version(request, *args, **kwargs)</span><br><span class="line">        request.version, request.versioning_scheme = version, scheme</span><br><span class="line"></span><br><span class="line">        # Ensure that the incoming request is permitted</span><br><span class="line">        self.perform_authentication(request)</span><br><span class="line">        self.check_permissions(request)</span><br><span class="line">        self.check_throttles(request)  #频率认证</span><br></pre></td></tr></table></figure><p>3.self.get_throttles() 频率组件最终要的两个方法：allow_request()和wait()</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def check_throttles(self, request):  #频率组件核心代码</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Check if request should be throttled.</span><br><span class="line">        Raises an appropriate exception if the request is throttled.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        throttle_durations = []</span><br><span class="line">        for throttle in self.get_throttles():</span><br><span class="line">            if not throttle.allow_request(request, self):</span><br><span class="line">                throttle_durations.append(throttle.wait())</span><br></pre></td></tr></table></figure><p>3-1. self.throttle_classes 出现频率配置settings信息，经过查询源码的settings文件对频率配置为空</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def get_throttles(self):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Instantiates and returns the list of throttles that this view uses.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return [throttle() for throttle in self.throttle_classes]  #频率组件配置信息</span><br></pre></td></tr></table></figure><ol start="4"><li>allow_request() 在自身、所在类都没有找到，那去父类找,在源码throttling.py中</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">class SimpleRateThrottle(BaseThrottle):</span><br><span class="line">   </span><br><span class="line">    cache = default_cache</span><br><span class="line">    timer = time.time</span><br><span class="line">    cache_format = &apos;throttle_%(scope)s_%(ident)s&apos;</span><br><span class="line">    scope = None</span><br><span class="line">    THROTTLE_RATES = api_settings.DEFAULT_THROTTLE_RATES</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        if not getattr(self, &apos;rate&apos;, None):</span><br><span class="line">            self.rate = self.get_rate()  #3.rate值就是方法get_rate的返回值（频率次数）</span><br><span class="line">        self.num_requests, self.duration = self.parse_rate(self.rate)</span><br><span class="line"></span><br><span class="line">    def get_cache_key(self, request, view):</span><br><span class="line">        raise NotImplementedError(&apos;.get_cache_key() must be overridden&apos;)</span><br><span class="line"></span><br><span class="line">　　#get_rate最后返回的结果是设置的频率次数</span><br><span class="line">    def get_rate(self):#1.在自定义类中要给scope属性赋值</span><br><span class="line">        if not getattr(self, &apos;scope&apos;, None):</span><br><span class="line">            msg = (&quot;You must set either `.scope` or `.rate` for &apos;%s&apos; throttle&quot; %</span><br><span class="line">                   self.__class__.__name__)</span><br><span class="line">            raise ImproperlyConfigured(msg)</span><br><span class="line"></span><br><span class="line">        try:</span><br><span class="line">            return self.THROTTLE_RATES[self.scope]  #2.在settings文件中配置scope属性值对应的value</span><br><span class="line">        except KeyError:</span><br><span class="line">            msg = &quot;No default throttle rate set for &apos;%s&apos; scope&quot; % self.scope</span><br><span class="line">            raise ImproperlyConfigured(msg)</span><br><span class="line"></span><br><span class="line">    def parse_rate(self, rate):</span><br><span class="line">        if rate is None:</span><br><span class="line">            return (None, None)</span><br><span class="line">        num, period = rate.split(&apos;/&apos;)  #4.rate有值，根据源码，自定义的rate值是一个字符串，而且是这种格式：&apos;数字/以s,m,h,d之类开头的字母&apos;</span><br><span class="line">        num_requests = int(num)    #5.获得的数字就是设置的频率次数</span><br><span class="line">        duration = &#123;&apos;s&apos;: 1, &apos;m&apos;: 60, &apos;h&apos;: 3600, &apos;d&apos;: 86400&#125;[period[0]]  #6.获得是间隔的时间（以秒为单位）</span><br><span class="line">        return (num_requests, duration)  #7.数据返回给__init__，解压赋值</span><br><span class="line"></span><br><span class="line">    def allow_request(self, request, view):</span><br><span class="line">        if self.rate is None:</span><br><span class="line">            return True</span><br><span class="line">　　　　　　　　　　　#get_cache_key就是要重写的方法，若不重写，会直接抛出异常</span><br><span class="line">        self.key = self.get_cache_key(request, view)  #8.自定义的时候需要重写的方法，有返回值，放入缓存中</span><br><span class="line">        if self.key is None:</span><br><span class="line">            return True</span><br><span class="line"></span><br><span class="line">        self.history = self.cache.get(self.key, [])  #9.获取缓存，通过key取值</span><br><span class="line">        self.now = self.timer()  #10.当前时间</span><br><span class="line"></span><br><span class="line">        # Drop any requests from the history which have now passed the</span><br><span class="line">        # throttle duration</span><br><span class="line">        while self.history and self.history[-1] &lt;= self.now - self.duration:</span><br><span class="line">            self.history.pop()</span><br><span class="line">        if len(self.history) &gt;= self.num_requests:</span><br><span class="line">            return self.throttle_failure()</span><br><span class="line">        return self.throttle_success()</span><br><span class="line"></span><br><span class="line">    def throttle_success(self):</span><br><span class="line">        self.history.insert(0, self.now)</span><br><span class="line">        self.cache.set(self.key, self.history, self.duration)</span><br><span class="line">        return True</span><br><span class="line"></span><br><span class="line">    def throttle_failure(self):</span><br><span class="line">        return False</span><br><span class="line"></span><br><span class="line">　　#返回距下一次能请求的时间，限制的访问次数在parse_rate可以求出</span><br><span class="line">    def wait(self):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Returns the recommended next request time in seconds.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if self.history:</span><br><span class="line">            remaining_duration = self.duration - (self.now - self.history[-1])</span><br><span class="line">        else:</span><br><span class="line">            remaining_duration = self.duration</span><br><span class="line"></span><br><span class="line">        available_requests = self.num_requests - len(self.history) + 1</span><br><span class="line">        if available_requests &lt;= 0:</span><br><span class="line">            return None</span><br><span class="line"></span><br><span class="line">        return remaining_duration / float(available_requests)</span><br></pre></td></tr></table></figure><p><strong>核心源码分析</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">def check_throttles(self, request):</span><br><span class="line">    throttle_durations = []</span><br><span class="line">    # 1）遍历配置的频率认证类，初始化得到一个个频率认证类对象（会调用频率认证类的 __init__() 方法）</span><br><span class="line">    # 2）频率认证类对象调用 allow_request 方法，判断是否限次（没有限次可访问，限次不可访问）</span><br><span class="line">    # 3）频率认证类对象在限次后，调用 wait 方法，获取还需等待多长时间可以进行下一次访问</span><br><span class="line">    # 注：频率认证类都是继承 SimpleRateThrottle 类</span><br><span class="line">    for throttle in self.get_throttles():</span><br><span class="line">        if not throttle.allow_request(request, self):</span><br><span class="line">            # 只要频率限制了，allow_request 返回False了，才会调用wait</span><br><span class="line">            throttle_durations.append(throttle.wait())</span><br><span class="line"></span><br><span class="line">            if throttle_durations:</span><br><span class="line">                # Filter out `None` values which may happen in case of config / rate</span><br><span class="line">                # changes, see #1438</span><br><span class="line">                durations = [</span><br><span class="line">                    duration for duration in throttle_durations</span><br><span class="line">                    if duration is not None</span><br><span class="line">                ]</span><br><span class="line"></span><br><span class="line">                duration = max(durations, default=None)</span><br><span class="line">                self.throttled(request, duration)</span><br></pre></td></tr></table></figure><p>注意：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">主要流程在第四步中标出</span><br></pre></td></tr></table></figure><h1 id="自定义频率类"><a href="#自定义频率类" class="headerlink" title="自定义频率类"></a>自定义频率类</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 1) 自定义一个继承 SimpleRateThrottle 类 的频率类</span><br><span class="line"># 2) 设置一个 scope 类属性，属性值为任意见名知意的字符串</span><br><span class="line"># 3) 在settings配置文件中，配置drf的DEFAULT_THROTTLE_RATES，格式为 &#123;scope字符串值: &apos;次数/时间&apos;&#125;</span><br><span class="line"># 4) 在自定义频率类中重写 get_cache_key 方法</span><br><span class="line">    # 限制的对象返回 与限制信息有关的字符串</span><br><span class="line">    # 不限制的对象返回 None (只能放回None，不能是False或是&apos;&apos;等)</span><br></pre></td></tr></table></figure><p>写一个短信接口，设置 1/min频率限制</p><p>utils.throttles.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.throttling import SimpleRateThrottle</span><br><span class="line"></span><br><span class="line">class SMSRateThrottle(SimpleRateThrottle):</span><br><span class="line">    scope = &apos;sms&apos;</span><br><span class="line"></span><br><span class="line">    #只对提交手机号的get方法进行限制</span><br><span class="line">    def get_cache_key(self, request, view):</span><br><span class="line">        mobile = request.query_params.get(&apos;mobile&apos;)</span><br><span class="line">        #没有手机号就不做频率限制</span><br><span class="line">        if not mobile:</span><br><span class="line">            return None</span><br><span class="line">        #返回的信息可以用手机号动态变化，且不易重复的字符串，作为缓存的key</span><br><span class="line">        return &apos;throttle_%(scope)s_%(ident)s&apos; % &#123;&apos;scope&apos;: self.scope, &apos;ident&apos;: mobile&#125;</span><br></pre></td></tr></table></figure><p>settings.py配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># drf配置</span><br><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    # 频率限制条件配置</span><br><span class="line">    &apos;DEFAULT_THROTTLE_RATES&apos;: &#123;</span><br><span class="line">        &apos;sms&apos;: &apos;1/min&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>视图层：views.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">from .throttles import SMSRateThrottle</span><br><span class="line">class TestSMSAPIView(APIView):</span><br><span class="line">    # 局部配置频率认证</span><br><span class="line">    throttle_classes = [SMSRateThrottle]</span><br><span class="line">    def get(self, request, *args, **kwargs):</span><br><span class="line">        return APIResponse(0, &apos;get 获取验证码 OK&apos;)</span><br><span class="line">    def post(self, request, *args, **kwargs):</span><br><span class="line">        return APIResponse(0, &apos;post 获取验证码  OK&apos;)</span><br></pre></td></tr></table></figure><p>路由：urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(r&apos;^sms/$&apos;, views.TestSMSAPIView.as_view()),</span><br></pre></td></tr></table></figure><p>会限制的接口</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 只会对 /api/sms/?mobile=具体手机号 接口才会有频率限制，设置了限制频率，到达访问次数就会禁止</span><br><span class="line"># 1）对 /api/sms/ 或其他接口发送无限制</span><br><span class="line"># 2）对数据包提交mobile的/api/sms/接口无限制</span><br><span class="line"># 3）对不是mobile（如phone）字段提交的电话接口无限制</span><br></pre></td></tr></table></figure><h1 id="JWT认证"><a href="#JWT认证" class="headerlink" title="JWT认证"></a>JWT认证</h1><p>优点</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1) 服务器不要存储token，token交给每一个客户端自己存储，服务器压力小</span><br><span class="line">2）服务器存储的是 签发和校验token 两段算法，签发认证的效率高</span><br><span class="line">3）算法完成各集群服务器同步成本低，路由项目完成集群部署（适应高并发）</span><br></pre></td></tr></table></figure><p>格式</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1) jwt token采用三段式：头部.载荷.签名</span><br><span class="line">2）每一部分都是一个json字典加密形参的字符串</span><br><span class="line">3）头部和载荷采用的是base64可逆加密（前台后台都可以解密）</span><br><span class="line">4）签名采用hash256不可逆加密（后台校验采用碰撞校验）</span><br><span class="line">5）各部分字典的内容：</span><br><span class="line">    头部：基础信息 - 公司信息、项目组信息、可逆加密采用的算法</span><br><span class="line">    载荷：有用但非私密的信息 - 用户可公开信息、过期时间</span><br><span class="line">    签名：头部+载荷+秘钥 不可逆加密后的结果</span><br><span class="line">    注：服务器jwt签名加密秘钥一定不能泄露</span><br><span class="line">    </span><br><span class="line">签发token：固定的头部信息加密.当前的登陆用户与过期时间加密.头部+载荷+秘钥生成不可逆加密</span><br><span class="line">校验token：头部可校验也可以不校验，载荷校验出用户与过期时间，头部+载荷+秘钥完成碰撞检测校验token是否被篡改</span><br></pre></td></tr></table></figure><h1 id="drf-jwt插件"><a href="#drf-jwt插件" class="headerlink" title="drf-jwt插件"></a>drf-jwt插件</h1><p>官网</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/jpadilla/django-rest-framework-jwt</span><br></pre></td></tr></table></figure><p>安装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install djangorestframework-jwt</span><br></pre></td></tr></table></figure><p>登录-签发token(生成token):urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># ObtainJSONWebToken视图类就是通过username和password得到user对象然后签发token（生成token）</span><br><span class="line">from rest_framework_jwt.views import ObtainJSONWebToken, obtain_jwt_token</span><br><span class="line">urlpatterns = [</span><br><span class="line">    # url(r&apos;^jogin/$&apos;, ObtainJSONWebToken.as_view()),</span><br><span class="line">    url(r&apos;^jogin/$&apos;, obtain_jwt_token),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>认证-校验token(解析token):全局或者配置drf-jwt的认证类 JSONWebTokenAuthentication</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from rest_framework.views import APIView</span><br><span class="line">from utils.response import APIResponse</span><br><span class="line"># 必须登录后才能访问 - 通过了认证权限组件</span><br><span class="line">from rest_framework.permissions import IsAuthenticated</span><br><span class="line">from rest_framework_jwt.authentication import JSONWebTokenAuthentication</span><br><span class="line">class UserDetail(APIView):</span><br><span class="line">    authentication_classes = [JSONWebTokenAuthentication]  # jwt-token校验request.user</span><br><span class="line">    permission_classes = [IsAuthenticated]  # 结合权限组件筛选掉游客</span><br><span class="line">    def get(self, request, *args, **kwargs):</span><br><span class="line">        return APIResponse(results=&#123;&apos;username&apos;: request.user.username&#125;)</span><br></pre></td></tr></table></figure><p>路由与接口测试</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 路由</span><br><span class="line">url(r&apos;^user/detail/$&apos;, views.UserDetail.as_view()),</span><br><span class="line"></span><br><span class="line"># 接口：/api/user/detail/</span><br><span class="line"># 认证信息：必须在请求头的 Authorization 中携带 &quot;jwt 后台签发的token&quot; 格式的认证字符串</span><br></pre></td></tr></table></figure><p><strong>注意：</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.签发token的时候，只有post请求，没有get请求</span><br><span class="line">2.生成token的时候需要通过json传入username和password</span><br><span class="line">3.解析token的时候，get请求需要在Headers中传入参数</span><br><span class="line">Authorization    jwt 用户对应的token值</span><br></pre></td></tr></table></figure></div><div><div><div style="text-align:center;color:#555;font-size:14px">-------------The End-------------</div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/DRF/" rel="tag"><i class="fa fa-tag"></i> DRF</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/posts/a9c3911b.html" rel="next" title="DRF框架 (六)"><i class="fa fa-chevron-left"></i> DRF框架 (六)</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/posts/ff99369d.html" rel="prev" title="DRF框架 (八)">DRF框架 (八)<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Xie"><p class="site-author-name" itemprop="name">Xie</p><p class="site-description motion-element" itemprop="description">Xie·Yu's blog.</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">33</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">5</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">9</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/ixieyu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:hexohe@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#drf频率组件源码"><span class="nav-number">1.</span> <span class="nav-text">drf频率组件源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义频率类"><span class="nav-number">2.</span> <span class="nav-text">自定义频率类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT认证"><span class="nav-number">3.</span> <span class="nav-text">JWT认证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#drf-jwt插件"><span class="nav-number">4.</span> <span class="nav-text">drf-jwt插件</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> &copy; 2018 – <span itemprop="copyrightYear">2020</span><span class="with-love" id="animate"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">Xie</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span title="站点总字数">114k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-coffee"></i></span> <span title="站点阅读时长">1:44</span></div> <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script>var now=new Date;function createtime(){var n=new Date("10/30/2018 18:00:00");now.setTime(now.getTime()+250),days=(now-n)/1e3/60/60/24,dnum=Math.floor(days),hours=(now-n)/1e3/60/60-24*dnum,hnum=Math.floor(hours),1==String(hnum).length&&(hnum="0"+hnum),minutes=(now-n)/1e3/60-1440*dnum-60*hnum,mnum=Math.floor(minutes),1==String(mnum).length&&(mnum="0"+mnum),seconds=(now-n)/1e3-86400*dnum-3600*hnum-60*mnum,snum=Math.round(seconds),1==String(snum).length&&(snum="0"+snum),document.getElementById("timeDate").innerHTML="本站已安全运行"+dnum+"天",document.getElementById("times").innerHTML=hnum+"小时"+mnum+"分"+snum+"秒"}setInterval("createtime()",250)</script></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script><script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script><script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script></body></html><script type="text/javascript" src="/js/src/click.js"></script>
